@@ -5,61 +5,63 @@ const featuresData: Feature[] = [
     id: 1,
     image: (
       <Image
-        src="/images/hero/960x0.webp"
+        src="/images/blog/mern.png"
         alt="Your Image"
         className="service-img"
         width={600}
         height={500}
       />
     ),
-    title: "Data Science Solutions",
-    paragraph:
-      "Unleash the power of your data with our advanced data science services. From predictive analytics to data visualization, we offer comprehensive solutions to help you extract actionable insights and drive informed decision-making.",
+    title: "MERN Full Stack Development ",
+    paragraph: `Learn the MERN stack: MongoDB, Express, React, and Node.js, to build powerful and modern web applications, Syllabus includes HTML, CSS, JavaScript, React.js, and Node.js.Ideal for aspiring full-stack developers looking to master the latest technologies in web development.`,
   },
   {
     id: 1,
     image: (
       <Image
-        src="/images/hero/web-development-coding-programming-internet-technology-business-concept-web-development-coding-programming-internet-technology-121903546.webp"
+        src="/images/blog/960x0.webp"
         alt="Your Image"
         className="service-img"
         width={600}
         height={500}
       />
     ),
-    title: "Web Development Services",
-    paragraph:
-      "Elevate your online presence with our bespoke web development services. Whether you need a stunning website, a powerful web application, or an intuitive e-commerce platform, our team has the expertise to bring your vision to life.",
+    title: "Data Science ",
+    paragraph: `Dive into the multidisciplinary field of data science, mastering techniques and tools to extract meaningful insights from data.
+Topics cover artificial intelligence and machine learning.
+Perfect for individuals interested in analyzing and interpreting data to drive business decisions.`,
   },
   {
     id: 1,
     image: (
       <Image
-        src="/images/hero/software-development-button.jpg"
+        src="/images/blog/1679683081898.png"
         alt="Your Image"
         className="service-img"
         width={600}
         height={500}
       />
     ),
-    title: "Software Development Solutions",
-    paragraph:
-      "From concept to deployment, we specialize in developing custom software solutions tailored to your specific requirements. Whether you're a startup or a large enterprise, we have the skills and experience to deliver robust and scalable software solutions.",
+    title: "Front-end Developer",
+    paragraph: `Learn the essentials of frontend development, focusing on HTML, CSS, and JavaScript.
+         Develop skills in creating user interfaces and interactive web experiences.
+         Suitable for beginners aiming to kickstart their career in web development.`,
   },
   {
     id: 1,
     image: (
       <Image
-        src="/images/hero/preview-image.jpg"
+        src="/images/blog/0_TrneyH4gnbEHvgGM.png"
         alt="Your Image"
         className="service-img"
         width={600}
         height={500}
       />
     ),
-    title: "AI & Machine Learning Solutions",
-    paragraph:
-      "Harness the potential of artificial intelligence with our machine learning services. Whether you need predictive modeling, natural language processing, or computer vision solutions, our team can help you leverage the latest advancements in AI to drive innovation and efficiency.",
+    title: "Node.js Developer",
+    paragraph: `Become proficient in backend development using Node.js.
+      Topics include JavaScript, MongoDB, NPM, REST API, and Node.js.
+      Designed for developers interested in building scalable and efficient backend systems for web applications.`,
   },
   {
     id: 1,

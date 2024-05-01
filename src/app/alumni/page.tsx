@@ -14,8 +14,8 @@ const Blog = () => {
   return (
     <>
       <Breadcrumb
-        pageName="Technologies"
-        description="These are our core technologies that drive innovation and empower our solutions to meet the demands of the digital landscape"
+        pageName="Selected Candidates"
+        description="Tekisky family wishes success and happiness"
       />
 
       <section className="pb-[120px] pt-[120px]">

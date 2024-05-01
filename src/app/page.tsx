@@ -2,6 +2,7 @@ import AboutSectionOne from "@/components/About/AboutSectionOne";
 import AboutSectionTwo from "@/components/About/AboutSectionTwo";
 import Blog from "@/components/Blog";
 import ScrollUp from "@/components/Common/ScrollUp";
+import Company from "@/components/Companies";
 import Contact from "@/components/Contact";
 import Features from "@/components/Features";
 import Hero from "@/components/Hero";
@@ -24,7 +25,7 @@ export default function Home() {
       <Video />
       {/* <AboutSectionOne /> */}
       {/* <AboutSectionTwo /> */}
-      <Testimonials />
+      <Company/>
       {/* <Blog /> */}
       <Contact />
     </>

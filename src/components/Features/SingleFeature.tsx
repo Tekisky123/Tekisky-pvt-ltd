@@ -5,7 +5,7 @@ const SingleFeature = ({ feature }: { feature: Feature }) => {
   return (
     <div className="w-full">
       <div className="wow fadeInUp" data-wow-delay=".15s">
-        <div className="mb-10 flex h-[200px] w-[350px] items-center justify-center rounded-lg rounded-md bg-primary bg-opacity-10 object-contain text-primary">
+        <div className="mb-10 flex h-[200px] w-[350px] items-center justify-center rounded-lg rounded-md bg-primary bg-opacity-10 object-contain text-primary courses-img ">
           {image}
         </div>
 

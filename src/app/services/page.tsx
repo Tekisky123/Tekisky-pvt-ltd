@@ -1,12 +1,14 @@
-import Features from '@/components/Features'
-import React from 'react'
+import Testimonials from "@/components/Testimonials";
+import React from "react";
 
+type Props = {};
 
-
-const services = () => {
+const page = (props: Props) => {
   return (
-    <Features />
-  )
-}
+    <div>
+      <Testimonials />
+    </div>
+  );
+};
 
-export default services
+export default page;

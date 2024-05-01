@@ -1,4 +1,4 @@
-.place-card .place-card-large{
+.place-card .place-card-large {
   display: none !important;
 }
 
@@ -36,9 +36,17 @@
   }
 }
 
+.profile-container {
+  width: 30% !important;
+}
+.profiles {
+}
+.courses-img {
+  border: 1px solid gray;
+}
 
 .content-image {
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
 }
 
@@ -64,15 +72,16 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: radial-gradient(farthest-side,#234bf2 94%,#0000) top/9px 9px no-repeat,
-         conic-gradient(#0000 30%,#234bf2);
-  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+  background:
+    radial-gradient(farthest-side, #234bf2 94%, #0000) top/9px 9px no-repeat,
+    conic-gradient(#0000 30%, #234bf2);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
   animation: spinner-c7wet2 1s infinite linear;
 }
 
 @keyframes spinner-c7wet2 {
   100% {
-     transform: rotate(1turn);
+    transform: rotate(1turn);
   }
 }
 
@@ -108,4 +117,45 @@
 @media screen and (min-width: 1025px) and (max-width: 1280px) {
   .hero-section-img {
   }
+}
+
+body {
+  --sb-track-color: transparent;
+  --sb-thumb-color: #01b3f3;
+  --sb-size: 12px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 9px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 9px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
+
+.image-container {
+  display: flex;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.company-container {
+  height: 140px;
+}
+
+.company-logo {
+  height: 80px !important;
 }

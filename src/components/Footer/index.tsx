@@ -12,64 +12,20 @@ const Footer = () => {
               <div className="mb-12 max-w-[360px] ">
                 <Link href="/" className="mb-8 inline-block">
                   <Image
-                    src="/images/logo/Blue_Modern_Software_Company_Logo-removebg-preview.png"
+                    src="/images/logo/WhatsApp_Image_2024-04-30_at_12.39.09_86de1ffc-removebg-preview.png"
                     alt="logo"
                     className="w-full dark:hidden "
                     width={140}
                     height={30}
                   />
                   <Image
-                    src="/images/logo/Blue_Modern_Software_Company_Logo__1_-removebg-preview.png"
+                    src="/images/logo/WhatsApp_Image_2024-04-30_at_12.40.11_bdbde839-removebg-preview.png"
                     alt="logo"
                     className="hidden w-full dark:block"
                     width={140}
                     height={30}
                   />
                 </Link>
-                <p className="mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">
-                  Your Technology Partner
-                </p>
-                <div className="flex items-center">
-                  <a
-                    href="/"
-                    aria-label="social-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mr-6 text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 22 22"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M13.9831 19.25L9.82094 13.3176L4.61058 19.25H2.40625L8.843 11.9233L2.40625 2.75H8.06572L11.9884 8.34127L16.9034 2.75H19.1077L12.9697 9.73737L19.6425 19.25H13.9831ZM16.4378 17.5775H14.9538L5.56249 4.42252H7.04674L10.808 9.6899L11.4584 10.6039L16.4378 17.5775Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </a>
-
-                  <a
-                    href="/"
-                    aria-label="social-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
-                  >
-                    <svg
-                      width="17"
-                      height="16"
-                      viewBox="0 0 17 16"
-                      className="fill-current"
-                    >
-                      <path d="M15.2196 0H1.99991C1.37516 0 0.875366 0.497491 0.875366 1.11936V14.3029C0.875366 14.8999 1.37516 15.4222 1.99991 15.4222H15.1696C15.7943 15.4222 16.2941 14.9247 16.2941 14.3029V1.09448C16.3441 0.497491 15.8443 0 15.2196 0ZM5.44852 13.1089H3.17444V5.7709H5.44852V13.1089ZM4.29899 4.75104C3.54929 4.75104 2.97452 4.15405 2.97452 3.43269C2.97452 2.71133 3.57428 2.11434 4.29899 2.11434C5.02369 2.11434 5.62345 2.71133 5.62345 3.43269C5.62345 4.15405 5.07367 4.75104 4.29899 4.75104ZM14.07 13.1089H11.796V9.55183C11.796 8.7061 11.771 7.58674 10.5964 7.58674C9.39693 7.58674 9.222 8.53198 9.222 9.47721V13.1089H6.94792V5.7709H9.17202V6.79076H9.19701C9.52188 6.19377 10.2466 5.59678 11.3711 5.59678C13.6952 5.59678 14.12 7.08925 14.12 9.12897V13.1089H14.07Z" />
-                    </svg>
-                  </a>
-                </div>
               </div>
             </div>
 
@@ -97,49 +53,15 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      href="/services"
+                      href="/courses"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Services
+                      Courses
                     </Link>
                   </li>
                 </ul>
               </div>
             </div>
-
-            {/* <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
-              <div className="mb-12 lg:mb-16">
-                <h2 className="mb-10 text-xl font-bold text-black dark:text-white">
-                  Terms
-                </h2>
-                <ul>
-                  <li>
-                    <Link
-                      href="/"
-                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
-                    >
-                      TOS
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/"
-                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
-                    >
-                      Privacy Policy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/"
-                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
-                    >
-                      Refund Policy
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div> */}
 
             <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-2/12">
               <div className="mb-12 lg:mb-16">
@@ -166,8 +88,41 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
+            <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
+              <div className="mb-12 lg:mb-16">
+                <h2 className="mb-10 text-xl font-bold text-black dark:text-white">
+                  Need Any Help?
+                </h2>
+                <ul>
+                  <li>
+                    <Link
+                      href="mailto:hr@tekisky.com"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                    >
+                      hr@tekisky.com
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="tel:+918625817334"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                    >
+                      +91 8625817334
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="tel:+919890796149"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                    >
+                      +91 9890796149
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12620.934558199717!2d144.7402721296486!3d-37.73766266605428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad6f4dfee4cd913%3A0x7519fcd549b136e9!2s22%20%20St%2C%20%20Springs%20VIC%203023%2C%20Australia!5e0!3m2!1sen!2sin!4v1713851480205!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.3526951928493!2d77.30269397520799!3d19.17979168204619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd1d7502795a5c1%3A0x15ded39c097470bd!2sTekisky%20pvt.%20ltd.!5e0!3m2!1sen!2sin!4v1714464979876!5m2!1sen!2sin"
               width="100%"
               height="350"
               className="google-map-footer "
@@ -180,7 +135,7 @@ const Footer = () => {
           <div className="h-px w-full bg-gradient-to-r from-transparent via-[#D2D8E183] to-transparent dark:via-[#959CB183]"></div>
           <div className="py-8">
             <p className="text-center text-base text-body-color dark:text-white">
-              22 Jolimont Street, Caroline Springs, Victoria 3023, Australia
+              2nd Floor, Opposite Water Tank, Workshop Corner, Nanded,
             </p>
           </div>
         </div>
@@ -240,8 +195,8 @@ const Footer = () => {
                 y2="59.8878"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0.62" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
+                <stop stopColor="#0092d5" stopOpacity="0.62" />
+                <stop offset="1" stopColor="#0092d5" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="paint1_linear_94:889"
@@ -251,8 +206,8 @@ const Footer = () => {
                 y2="20.668"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0.51" />
+                <stop stopColor="#0092d5" stopOpacity="0" />
+                <stop offset="1" stopColor="#0092d5" stopOpacity="0.51" />
               </linearGradient>
               <linearGradient
                 id="paint2_linear_94:889"
@@ -262,8 +217,8 @@ const Footer = () => {
                 y2="25.1062"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0.62" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
+                <stop stopColor="#0092d5" stopOpacity="0.62" />
+                <stop offset="1" stopColor="#0092d5" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="paint3_linear_94:889"
@@ -273,8 +228,8 @@ const Footer = () => {
                 y2="80.6826"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0.51" />
+                <stop stopColor="#0092d5" stopOpacity="0" />
+                <stop offset="1" stopColor="#0092d5" stopOpacity="0.51" />
               </linearGradient>
               <linearGradient
                 id="paint4_linear_94:889"
@@ -284,8 +239,8 @@ const Footer = () => {
                 y2="58.2156"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0.62" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
+                <stop stopColor="#0092d5" stopOpacity="0.62" />
+                <stop offset="1" stopColor="#0092d5" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="paint5_linear_94:889"
@@ -295,8 +250,8 @@ const Footer = () => {
                 y2="41.6598"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0.51" />
+                <stop stopColor="#0092d5" stopOpacity="0" />
+                <stop offset="1" stopColor="#0092d5" stopOpacity="0.51" />
               </linearGradient>
             </defs>
           </svg>

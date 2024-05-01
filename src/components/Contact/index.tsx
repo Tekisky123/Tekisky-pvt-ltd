@@ -1,20 +1,23 @@
 "use client";
-import {  useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import Loader from "../Common/Loader";
 
 const Contact = () => {
-
-  const router = useRouter()
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    mobile: "",
+
     message: "",
     errors: {
       name: "",
       email: "",
+      mobile: "",
+
       message: "",
     },
   });
@@ -43,7 +46,7 @@ const Contact = () => {
     try {
       const response = await axios.post(
         "https://tekiskysoftware-backend.onrender.com/api/submitForm",
-        formData
+        formData,
       );
       if (response.status === 200) {
         Swal.fire({
@@ -54,10 +57,14 @@ const Contact = () => {
           setFormData({
             name: "",
             email: "",
+            mobile: "",
+
             message: "",
             errors: {
               name: "",
               email: "",
+              mobile: "",
+
               message: "",
             },
           });
@@ -77,17 +84,18 @@ const Contact = () => {
         text: "Error sending email",
       });
     }
-    setShowLoader(false); 
+    setShowLoader(false);
     setSubmitting(false);
   };
 
   const validateForm = () => {
-    const { name, email, message } = formData;
+    const { name, email, mobile, message } = formData;
     let valid = true;
     const errors = {
       name: name.trim() ? "" : "Name is required",
       email: email.trim() ? "" : "Email address is required",
       message: message.trim() ? "" : "Message is required",
+      mobile: message.trim() ? " " : "Mobile is required",
     };
 
     setFormData({ ...formData, errors });
@@ -97,10 +105,10 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="overflow-hidden py-16 md:py-20 lg:py-28 relative"
+      className="relative overflow-hidden py-16 md:py-20 lg:py-28"
     >
-        {showLoader && <Loader />}
-     
+      {showLoader && <Loader />}
+
       <div className="container">
         <div className="w-full px-4 lg:w-7/12 xl:w-8/12">
           <div
@@ -113,7 +121,7 @@ const Contact = () => {
             <p className="mb-12 text-base font-medium text-body-color">
               Our support team will get back to you ASAP via email.
             </p>
-           
+
             <form onSubmit={handleSubmit}>
               <div className="-mx-4 flex flex-wrap">
                 <div className="w-full px-4 md:w-1/2">
@@ -172,6 +180,32 @@ const Contact = () => {
                 <div className="w-full px-4">
                   <div className="mb-8">
                     <label
+                      htmlFor="mobile"
+                      className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                    >
+                      Your Mobile
+                    </label>
+                    <input
+                      type="text"
+                      id="mobile"
+                      name="mobile"
+                      value={formData.mobile}
+                      onChange={handleChange}
+                      placeholder="Enter your mobile number"
+                      className={`border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none ${
+                        formData.errors.mobile && "border-red-500"
+                      }`}
+                    />
+                    {formData.errors.mobile && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {formData.errors.mobile}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="w-full px-4">
+                  <div className="mb-8">
+                    <label
                       htmlFor="message"
                       className="mb-3 block text-sm font-medium text-dark dark:text-white"
                     >
@@ -197,7 +231,7 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="rounded-sm bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark"
+                    className="rounded-lg bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark "
                   >
                     {submitting ? "Submitting..." : "Submit Message"}
                   </button>

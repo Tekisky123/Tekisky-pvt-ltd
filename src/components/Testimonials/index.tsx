@@ -37,8 +37,8 @@ const Testimonials = () => {
     <section className="relative z-10 bg-gray-light py-16 dark:bg-bg-color-dark md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
-          title="What Our Users Says"
-          paragraph="we pride ourselves on delivering exceptional experiences to our clients. Here's what some of them have to say about working with us:"
+          title="Our Services"
+          paragraph="At Tekisky Pvt Ltd, we offer a comprehensive range of services to meet your digital needs. From web development to data science, our team of experts is dedicated to delivering innovative solutions that drive results for your business."
           center
         />
 

@@ -18,46 +18,16 @@ const AboutSectionOne = () => {
   );
 
   return (
-    <section id="about" className="pt-16 md:pt-20 lg:pt-28">
+    <section id="about" className="">
       <div className="container">
-        <div className="border-b border-body-color/[.15] pb-16 dark:border-white/[.15] md:pb-20 lg:pb-28">
+        <div className="border-b border-body-color/[.15]  dark:border-white/[.15] ">
           <div className="-mx-4 flex flex-wrap items-center">
-            <div className="w-full px-4 lg:w-1/2">
-              <SectionTitle
-                title="Who We Are"
-                paragraph="At Tekisky Software, we're more than just developers. We're your trusted partners in digital transformation. Our team is made up of experts with a wide range of experience in different industries. This diversity helps us understand and solve your unique problems. We're dedicated to creating custom solutions that go above and beyond what you expect."
-                mb="44px"
-              />
-
-              <div
-                className="mb-12 max-w-[570px] lg:mb-0"
-                data-wow-delay=".15s"
-              >
-                <h3 className="mb-6 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Our Expertise</h3>
-
-                <div className="mx-[-12px] flex flex-wrap">
-                  <div className="w-full px-3 sm:w-1/2 lg:w-full xl:w-1/2">
-                    <List text="Diverse Skill Sets" />
-                    <List text="Industry Experience" />
-                    <List text="Strategic Insight" />
-                  </div>
-
-                  <div className="w-full px-3 sm:w-1/2 lg:w-full xl:w-1/2">
-                    <List text="Collaborative Approach" />
-                    <List text="Innovative Solutions" />
-                    <List text="Client-Centric Focus" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="w-full px-4 lg:w-1/2">
-              <div className="relative mx-auto aspect-[25/24] max-w-[500px] lg:mr-0">
+          <div className="relative mx-auto  max-w-[700px] ">
                 <Image
-                  src="/images/about/At the office-amico.svg"
+                  src="/images/hero/Company-pana.svg"
                   alt="about-image"
                   width={650}
-                  height={100}
+                  height={80}
                   className="mx-auto max-w-full drop-shadow-three  dark:drop-shadow-none lg:mr-0"
                 />
                 {/* <Image
@@ -67,6 +37,41 @@ const AboutSectionOne = () => {
                   className="mx-auto hidden max-w-full drop-shadow-three dark:block dark:drop-shadow-none lg:mr-0"
                 /> */}
               </div>
+            
+            <div className="w-full px-4 lg:w-1/2">
+              <SectionTitle
+                title="Who We Are"
+                paragraph="Tekisky Private Limited is a dynamic technology company incorporated on September 27, 2021. Based in India, Tekisky is a powerhouse of dedicated developers and creative designers committed to providing elegant business solutions for brands worldwide. Our team thrives on innovation and creativity, leveraging the latest technologies to craft tailored solutions that meet the unique needs of each client."
+                mb="44px"
+              />
+
+              <div
+                className="mb-8 max-w-[570px] lg:mb-0"
+                data-wow-delay=".15s"
+              >
+                <h3 className="mb-6 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
+                  Our Expertise
+                </h3>
+
+                <div className="mx-[-12px] flex flex-wrap">
+                  <div className="w-full px-3 sm:w-1/2 lg:w-full xl:w-1/2">
+                    <List text="Web Development" />
+                    <List text="Mobile App Development" />
+                    <List text="UI/UX Design" />
+                    <List text="Startup Tech Partnerships" />
+                  </div>
+
+                  <div className="w-full px-3 sm:w-1/2 lg:w-full xl:w-1/2">
+                    <List text="Logo Design" />
+                    <List text="Data Mining" />
+                    <List text="Customized E-commerce Solutions" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full px-4 lg:w-1/2">
+             
             </div>
           </div>
         </div>

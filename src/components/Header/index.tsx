@@ -54,7 +54,7 @@ const Header = () => {
       >
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
-            <div className="w-60 max-w-full px-4 xl:mr-12">
+            <div className="w-80 max-w-full px-4 xl:mr-12">
               <Link
                 href="/"
                 className={`header-logo block w-full ${
@@ -62,18 +62,18 @@ const Header = () => {
                 } `}
               >
                 <Image
-                  src="/images/logo/Blue_Modern_Software_Company_Logo-removebg-preview.png"
+                  src="/images/logo/WhatsApp_Image_2024-04-30_at_12.39.09_86de1ffc-removebg-preview.png"
                   alt="logo"
-                  width={110}
-                  height={10}
+                  width={130}
+                  height={30}
                   className="w-full dark:hidden"
                 />
                 <Image
-                  src="/images/logo/Blue_Modern_Software_Company_Logo__1_-removebg-preview.png"
+                  src="/images/logo/WhatsApp_Image_2024-04-30_at_12.40.11_bdbde839-removebg-preview.png"
                   alt="logo"
                   className="hidden w-full dark:block"
-                  width={110}
-                  height={10}
+                  width={130}
+                  height={30}
                 />
 
                 {/* <h1>Tekisky Software</h1> */}
