@@ -9,7 +9,7 @@ import Video from "@/components/Video";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Tekisky Software",
+  title: "Tekisky Pvt Ltd",
   description: "",
   // other metadata
 };

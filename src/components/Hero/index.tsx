@@ -16,7 +16,7 @@ const Hero = () => {
                 Tekisky Private Limited
                 </h1>
                 <p className="mb-10 text-justify text-base !leading-relaxed text-body-color dark:text-body-color-dark sm:text-lg md:text-xl">
-                is a Private incorporated on 27 September 2021 Tekisky, providing elegant business solutions for brands across the globe.
+                Elevating Businesses, Empowering Success: Embark on a Journey of Excellence with Us and Discover the Difference We Can Make for Your Success.
                 </p>
 
                 <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 md:items-start">

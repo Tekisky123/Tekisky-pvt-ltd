@@ -4,16 +4,14 @@ import Image from "next/image";
 import { useState } from "react";
 import SectionTitle from "../Common/SectionTitle";
 
-import ModalVideo from "react-modal-video";
 
 const Video = () => {
-  const [isOpen, setOpen] = useState(false);
 
   return (
     <section className="py-16 md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
-          title="Why Choose Tekisky Software?"
+          title="Why Choose Tekisky ?"
           paragraph=""
           center
           mb="80px"

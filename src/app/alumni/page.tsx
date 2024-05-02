@@ -6,7 +6,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Technology Page",
-  description: "This is Technology Page Of Tekisky Software",
+  description: "This is Technology Page Of Tekisky Pvt Ltd",
   // other metadata
 };
 
