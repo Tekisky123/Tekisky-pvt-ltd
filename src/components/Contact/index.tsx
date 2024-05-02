@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -11,13 +12,11 @@ const Contact = () => {
     name: "",
     email: "",
     mobile: "",
-
     message: "",
     errors: {
       name: "",
       email: "",
       mobile: "",
-
       message: "",
     },
   });
@@ -26,12 +25,18 @@ const Contact = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let error = "";
+    if (name === "mobile") {
+      if (!/^\d*$/.test(value)) {
+        error = "Mobile number must contain only digits";
+      }
+    }
     setFormData({
       ...formData,
       [name]: value,
       errors: {
         ...formData.errors,
-        [name]: value.trim() ? "" : `${name} is required`,
+        [name]: error,
       },
     });
   };
@@ -58,13 +63,11 @@ const Contact = () => {
             name: "",
             email: "",
             mobile: "",
-
             message: "",
             errors: {
               name: "",
               email: "",
               mobile: "",
-
               message: "",
             },
           });
@@ -90,16 +93,24 @@ const Contact = () => {
 
   const validateForm = () => {
     const { name, email, mobile, message } = formData;
-    let valid = true;
     const errors = {
       name: name.trim() ? "" : "Name is required",
       email: email.trim() ? "" : "Email address is required",
+      mobile: mobile.trim()
+        ? mobile.length === 10
+          ? ""
+          : "Mobile number must be 10 digits"
+        : "Mobile is required",
       message: message.trim() ? "" : "Message is required",
-      mobile: message.trim() ? " " : "Mobile is required",
     };
 
     setFormData({ ...formData, errors });
-    return Object.values(errors).every((error) => error === "");
+    return Object.values(errors).every((error) => !error);
+  };
+
+  const allFieldsFilled = () => {
+    const { name, email, mobile, message } = formData;
+    return name && email && mobile && message;
   };
 
   return (
@@ -160,7 +171,7 @@ const Contact = () => {
                       Your Email
                     </label>
                     <input
-                      type="text"
+                      type="email"
                       id="email"
                       name="email"
                       value={formData.email}
@@ -177,6 +188,7 @@ const Contact = () => {
                     )}
                   </div>
                 </div>
+
                 <div className="w-full px-4">
                   <div className="mb-8">
                     <label
@@ -189,8 +201,14 @@ const Contact = () => {
                       type="text"
                       id="mobile"
                       name="mobile"
+                      maxLength={10}
                       value={formData.mobile}
                       onChange={handleChange}
+                      onKeyPress={(e) => {
+                        if (e.key === "e" || e.key === "+" || e.key === "-") {
+                          e.preventDefault();
+                        }
+                      }}
                       placeholder="Enter your mobile number"
                       className={`border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none ${
                         formData.errors.mobile && "border-red-500"
@@ -203,6 +221,7 @@ const Contact = () => {
                     )}
                   </div>
                 </div>
+
                 <div className="w-full px-4">
                   <div className="mb-8">
                     <label
@@ -230,7 +249,7 @@ const Contact = () => {
                 <div className="w-full px-4">
                   <button
                     type="submit"
-                    disabled={submitting}
+                    disabled={submitting || !allFieldsFilled()}
                     className="rounded-lg bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark "
                   >
                     {submitting ? "Submitting..." : "Submit Message"}
