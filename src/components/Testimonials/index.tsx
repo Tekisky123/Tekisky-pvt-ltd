@@ -5,30 +5,63 @@ import SingleTestimonial from "./SingleTestimonial";
 const testimonialData: Testimonial[] = [
   {
     id: 1,
-    name: "Musharof Chy",
-    designation: "Founder @TailGrids",
+    
+    name: "Web Development:",
+    
     content:
-      " Their team's expertise and dedication to excellence helped us achieve our goals faster than we ever thought possible From the initial consultation to the final implementation",
-    image: "",
-    star: 5,
+      "Our web development services are tailored to your specific requirements, ensuring that your online presence reflects your brand identity and values. Whether you need a custom website or an e-commerce platform, we have the expertise to bring your vision to life.",
+    image: "/images/hero/web-development-coding-programming-internet-technology-business-concept-web-development-coding-programming-internet-technology-121903546.webp",
+   
   },
   {
     id: 2,
-    name: "Devid Weilium",
-    designation: "Founder @UIdeck",
+   
+    name: "Mobile App Development:",
+    
     content:
-      "Tekisky Software truly understands our vision and delivers solutions that exceed our expectations every time. Their collaborative approach and commitment to quality make them a valuable partner for our organization",
-    image: "/images/testimonials/auth-02.png",
-    star: 5,
+      "From native apps to cross-platform solutions, our mobile app development services cover all your needs. We specialize in creating engaging and user-friendly applications that enhance the mobile experience for your customers.",
+    image: "/images/hero/gradient-ui-ux-background_23-2149065783.avif",
+    
   },
   {
     id: 3,
-    name: "Lethium Frenci",
-    designation: "Founder @Lineicons",
+   
+    name: "Software Development:",
+    
     content:
-      "I can't recommend Tekisky Software highly enough. Their agility and responsiveness have been crucial in helping us navigate the ever-changing digital landscape. Partnering with them has been a game-changer",
-    image: "/images/testimonials/auth-03.png",
-    star: 5,
+      "Our software development services are designed to streamline your business operations and drive efficiency. Whether you need a custom solution or an off-the-shelf product, we have the skills and experience to deliver high-quality software that meets your needs.",
+    image: "/images/hero/software-development-button.jpg",
+    
+  },
+  {
+    id: 4,
+   
+    name: "UI/UX Design:",
+    
+    content:
+      "User experience is at the heart of everything we do. Our UI/UX design services focus on creating intuitive and visually appealing interfaces that delight users and drive engagement.",
+    image: "/images/hero/gradient-ui-ux-background_23-2149052117.avif",
+    
+  },
+  {
+    id: 5,
+   
+    name: "Data Science:",
+    
+    content:
+      "Unlock the power of your data with our data science services. From data analysis to predictive modeling, we help you turn raw data into actionable insights that drive informed decision-making.",
+    image: "/images/blog/960x0.webp",
+    
+  },
+  {
+    id: 6,
+   
+    name: "Startup Tech Partnerships:",
+    
+    content:
+      "Our e-commerce solutions are designed to help you succeed in the competitive online marketplace. From website development to digital marketing, we provide end-to-end solutions that drive sales and maximize ROI.",
+    image: "/images/hero/960x0.webp",
+    
   },
 ];
 
