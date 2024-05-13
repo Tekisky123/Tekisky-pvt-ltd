@@ -42,13 +42,15 @@ const Header = () => {
   };
 
   const usePathName = usePathname();
+  // Check if token exists in localStorage
+  const hasToken = typeof window !== "undefined" && localStorage.getItem("token");
 
   return (
     <>
       <header
         className={`header left-0 top-0 z-40 flex w-full items-center ${
           sticky
-            ? "fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition dark:bg-gray-dark dark:shadow-sticky-dark"
+            ? "fixed z-[980] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition dark:bg-gray-dark dark:shadow-sticky-dark"
             : "absolute bg-transparent"
         }`}
       >
@@ -75,8 +77,6 @@ const Header = () => {
                   width={130}
                   height={30}
                 />
-
-                {/* <h1>Tekisky Software</h1> */}
               </Link>
             </div>
             <div className="flex w-full items-center justify-between px-4">
@@ -118,7 +118,11 @@ const Header = () => {
                           <Link
                             href={menuItem.path}
                             onClick={handleMenuItemClick}
-                            className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${usePathName === menuItem.path ? "text-primary underline dark:text-white" : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"}`}
+                            className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
+                              usePathName === menuItem.path
+                                ? "text-primary underline dark:text-white"
+                                : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
+                            }`}
                           >
                             {menuItem.title}
                           </Link>
@@ -159,6 +163,21 @@ const Header = () => {
                         )}
                       </li>
                     ))}
+                    {/* Conditionally render Dashboard if token exists */}
+                    {hasToken && (
+                      <li className="group relative">
+                        <Link
+                          href="/dashboard"
+                          className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
+                            usePathName === "/dashboard"
+                              ? "text-primary underline dark:text-white"
+                              : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
+                          }`}
+                        >
+                          Dashboard
+                        </Link>
+                      </li>
+                    )}
                   </ul>
                 </nav>
               </div>

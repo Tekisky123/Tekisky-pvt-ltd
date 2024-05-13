@@ -1,10 +1,9 @@
-import AboutSectionOne from "@/components/About/AboutSectionOne";
-import AboutSectionTwo from "@/components/About/AboutSectionTwo";
-import Blog from "@/components/Blog";
+
 import ScrollUp from "@/components/Common/ScrollUp";
 import Company from "@/components/Companies";
 import Contact from "@/components/Contact";
 import Hero from "@/components/Hero";
+import Slider from "@/components/Slider";
 import Video from "@/components/Video";
 import { Metadata } from "next";
 
@@ -20,6 +19,7 @@ export default function Home() {
       <ScrollUp />
       <Hero />
       {/* <Features /> */}
+      <Slider/>
       <Video />
       {/* <AboutSectionOne /> */}
       {/* <AboutSectionTwo /> */}

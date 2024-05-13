@@ -8,7 +8,7 @@ import SectionTitle from "../Common/SectionTitle";
 const Video = () => {
 
   return (
-    <section className="py-16 md:py-20 lg:py-28">
+    <section className=" md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
           title="Why Choose Tekisky ?"
@@ -19,7 +19,7 @@ const Video = () => {
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="w-full px-4 lg:w-1/2 ">
             <div
-              className="relative mx-auto mb-12 aspect-[25/24] max-w-[600px] text-center lg:m-0"
+              className="relative mx-auto mb-12 aspect-[35/24] max-w-[700px] text-center lg:m-0"
               data-wow-delay=".15s"
             >
               <Image
@@ -49,7 +49,7 @@ const Video = () => {
                   International Reach:
                 </h3>
                 <p className="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
-                  ekisky places great emphasis on building and maintaining
+                  Tekisky places great emphasis on building and maintaining
                   partnerships with distinguished international partners. This
                   global network allows them to access cutting-edge technologies
                   and deliver tailored solutions to customers worldwide.

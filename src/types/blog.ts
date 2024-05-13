@@ -2,9 +2,11 @@
 
 export type Blog = {
   id: number;
-  title: string;
-  company: string;
+  name: string;
+  gender: string;
   education: string;
+  companyName:string;
+  designation:string;
   image: string;
   
 };

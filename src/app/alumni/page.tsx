@@ -1,16 +1,27 @@
+"use client";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import SingleBlog from "@/components/Blog/SingleBlog";
-import blogData from "@/components/Blog/blogData";
 import Breadcrumb from "@/components/Common/Breadcrumb";
-
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Technology Page",
-  description: "This is Technology Page Of Tekisky Pvt Ltd",
-  // other metadata
-};
+import { Blog } from "@/types/blog";
 
 const Blog = () => {
+  const [blogData, setBlogData] = useState<Blog[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://tekisky-pvt-ltd-backend.onrender.com/selectedStudent/getSelectedStudent",
+      )
+      .then((response) => {
+        const reversedData = response.data.reverse();
+        setBlogData(reversedData);
+      })
+      .catch((error) => {
+        console.error("Error fetching blog data:", error);
+      });
+  }, []);
+
   return (
     <>
       <Breadcrumb

@@ -5,7 +5,7 @@ import SectionTitle from "../Common/SectionTitle";
 
 const Company = () => {
   return (
-    <section className="pt-16">
+    <section className="">
       <p style={{textAlign:"center"}}>Happy Placements</p>
       <SectionTitle
         title="Our Prestigious Companies"

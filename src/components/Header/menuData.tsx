@@ -1,5 +1,6 @@
 import { Menu } from "@/types/menu";
 
+
 const menuData: Menu[] = [
   {
     id: 1,
@@ -31,12 +32,20 @@ const menuData: Menu[] = [
     path: "/alumni",
     newTab: false,
   },
+
   {
     id: 6,
+    title: "Tekisky Consultancy",
+    path: "/consultancy",
+    newTab: false,
+  },
+  {
+    id: 7,
     title: "Contact Us",
     path: "/contact-us",
     newTab: false,
   },
  
 ];
+
 export default menuData;
