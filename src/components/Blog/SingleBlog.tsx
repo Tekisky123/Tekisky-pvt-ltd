@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const SingleBlog = ({ blog }: { blog: Blog }) => {
-  const { name, gender, image, companyName, education, designation } = blog;
+  const { name, gender, companyName, education, designation } = blog;
   return (
     <div className="group relative mb-10 overflow-hidden rounded-sm bg-white shadow-one duration-300 hover:shadow-two dark:bg-dark dark:hover:shadow-gray-dark">
       <Link
