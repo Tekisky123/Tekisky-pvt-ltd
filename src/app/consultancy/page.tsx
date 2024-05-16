@@ -2,7 +2,6 @@
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Image from "next/image";
 import SectionTitle from "@/components/Common/SectionTitle";
 import fullStackSkills from "@/components/Consultancy/ConsultancyData";
 import Loader from "@/components/Loader/Loader";

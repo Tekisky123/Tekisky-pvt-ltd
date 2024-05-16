@@ -1,8 +1,8 @@
 "use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 
@@ -18,6 +18,7 @@ const Header = () => {
   const handleMenuItemClick = () => {
     setNavbarOpen(false);
   };
+
   // Sticky Navbar
   const [sticky, setSticky] = useState(false);
   const handleStickyNavbar = () => {
@@ -43,7 +44,17 @@ const Header = () => {
 
   const usePathName = usePathname();
   // Check if token exists in localStorage
-  const hasToken = typeof window !== "undefined" && localStorage.getItem("token");
+  const hasToken =
+    typeof window !== "undefined" && localStorage.getItem("token");
+
+  // Logout function
+  const handleLogout = () => {
+    setNavbarOpen(false);
+    // Remove token from localStorage
+    localStorage.removeItem("token");
+    // Navigate to "/" route
+    router.push("/");
+  };
 
   return (
     <>
@@ -163,11 +174,11 @@ const Header = () => {
                         )}
                       </li>
                     ))}
-                    {/* Conditionally render Dashboard if token exists */}
-                    {hasToken && (
+                     {hasToken && (
                       <li className="group relative">
                         <Link
                           href="/dashboard"
+                          onClick={handleMenuItemClick}
                           className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
                             usePathName === "/dashboard"
                               ? "text-primary underline dark:text-white"
@@ -176,6 +187,16 @@ const Header = () => {
                         >
                           Dashboard
                         </Link>
+                      </li>
+                    )}
+                    {hasToken && (
+                      <li className="group relative">
+                        <button
+                          onClick={handleLogout}
+                          className="flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
+                        >
+                          Logout
+                        </button>
                       </li>
                     )}
                   </ul>

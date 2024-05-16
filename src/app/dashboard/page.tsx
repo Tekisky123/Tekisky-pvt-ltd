@@ -1,21 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Swal from "sweetalert2";
 import AddStudentModal from "./AddStudentModal";
 import AddUserModel from "./AddUserModel";
 import ConsultancyApplications from "@/components/Consultancy/ConsultancyApplication";
-// import AddUserForm from "./AddUserForm";
 
 const Dashboard = () => {
   const [students, setStudents] = useState([]);
   const [users, setUsers] = useState([]);
-  const [token, setToken] = useState("");
   const [showStudentModal, setShowStudentModal] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-    // Retrieve token from local storage
     const storedToken = localStorage.getItem("token");
     setToken(storedToken || "");
   }, []);
@@ -70,11 +68,14 @@ const Dashboard = () => {
 
     if (confirmed.isConfirmed) {
       try {
-        await axios.delete(`https://tekisky-pvt-ltd-backend.onrender.com/user/delete/${id}`, {
-          headers: {
-            Authorization: token,
+        await axios.delete(
+          `https://tekisky-pvt-ltd-backend.onrender.com/user/delete/${id}`,
+          {
+            headers: {
+              Authorization: token,
+            },
           },
-        });
+        );
         // Update users state after deletion
         setUsers(users.filter((user) => user._id !== id));
         Swal.fire("Deleted!", "User has been deleted.", "success");
@@ -207,7 +208,7 @@ const Dashboard = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                   FUll Name
                 </th>
-                
+
                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                   Email
                 </th>
@@ -225,7 +226,7 @@ const Dashboard = () => {
                   <td className="whitespace-nowrap px-6 py-4">
                     {user.fullName}
                   </td>
-                  
+
                   <td className="whitespace-nowrap px-6 py-4">{user.email}</td>
                   <td className="whitespace-nowrap px-6 py-4">
                     {user.mobileNumber}
@@ -243,7 +244,7 @@ const Dashboard = () => {
             </tbody>
           </table>
         </div>
-        <ConsultancyApplications/>
+        <ConsultancyApplications />
       </div>
     </div>
   );

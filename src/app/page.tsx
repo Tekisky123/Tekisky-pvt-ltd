@@ -3,6 +3,7 @@ import ScrollUp from "@/components/Common/ScrollUp";
 import Company from "@/components/Companies";
 import Contact from "@/components/Contact";
 import Hero from "@/components/Hero";
+import ScrollEffect from "@/components/ScrollEffect";
 import Slider from "@/components/Slider";
 import Video from "@/components/Video";
 import { Metadata } from "next";
@@ -18,6 +19,7 @@ export default function Home() {
     <>
       <ScrollUp />
       <Hero />
+      {/* <ScrollEffect/> */}
       {/* <Features /> */}
       <Slider/>
       <Video />

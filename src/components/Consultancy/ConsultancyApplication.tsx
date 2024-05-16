@@ -21,7 +21,7 @@ interface Applicant {
   degreeName: string;
   degreeCollegeName: string;
   yearOfPassing: number | null;
-  skills: Skill[];
+  skills: string[];
   yearsOfExperience: string;
   resumeUrl: string;
 }
@@ -33,16 +33,29 @@ const ConsultancyApplications: React.FC = () => {
   );
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const fetchApplicants = async () => {
-    try {
-      const response = await axios.get(
-        "https://tekisky-pvt-ltd-backend.onrender.com/consultancy/getAllUploadResume",
-      );
-      setApplicants(response.data);
-    } catch (error) {
-      console.error("Error fetching applicants:", error);
-    }
-  };
+  useEffect(() => {
+    const fetchApplicants = async () => {
+      try {
+        const storedToken = localStorage.getItem("token");
+        if (storedToken) {
+          const response = await axios.get(
+            "https://tekisky-pvt-ltd-backend.onrender.com/consultancy/getAllUploadResume",
+            {
+              headers: {
+                Authorization: storedToken,
+              },
+            },
+          );
+          setApplicants(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching applicants:", error);
+      }
+    };
+
+    console.log("Fetching applicants...");
+    fetchApplicants();
+  }, []);
 
   const handleViewMore = (applicant: Applicant) => {
     setSelectedApplicant(applicant);
@@ -51,10 +64,6 @@ const ConsultancyApplications: React.FC = () => {
   const handleCloseModal = () => {
     setSelectedApplicant(null);
   };
-  useEffect(() => {
-    console.log("Fetching applicants...");
-    fetchApplicants();
-  }, []);
 
   const filteredApplicants = applicants.filter((applicant) => {
     const searchTermLower = searchTerm ? searchTerm.toLowerCase() : ""; // Ensure searchTerm is not undefined
@@ -69,7 +78,12 @@ const ConsultancyApplications: React.FC = () => {
       applicant.yearsOfExperience &&
       applicant.yearsOfExperience.toString().includes(searchTermLower);
 
-    return fullNameMatch || experienceMatch;
+    // Check if any skill matches the search term
+    const skillMatch = applicant.skills.some((skill) =>
+      skill.toLowerCase().includes(searchTermLower),
+    );
+
+    return fullNameMatch || experienceMatch || skillMatch;
   });
 
   return (
@@ -99,6 +113,12 @@ const ConsultancyApplications: React.FC = () => {
                 Year Of Experience
               </th>
               <th className="border px-4 py-2  text-body-color  text-gray-700 dark:text-body-color-dark">
+                Skills
+              </th>
+              <th className="border px-4 py-2  text-body-color  text-gray-700 dark:text-body-color-dark">
+                Resume
+              </th>
+              <th className="border px-4 py-2  text-body-color  text-gray-700 dark:text-body-color-dark">
                 Actions
               </th>
             </tr>
@@ -109,9 +129,13 @@ const ConsultancyApplications: React.FC = () => {
                 <td className="border px-4 py-2">{applicant.fullName}</td>
                 <td className="border px-4 py-2">{applicant.email}</td>
                 <td className="border px-4 py-2">{applicant.mobileNumber}</td>
+
                 <td className="border px-4 py-2">
                   {applicant.yearsOfExperience}
                 </td>
+                <td className="border px-4 py-2" style={{"width":"10px"}}>{applicant.skills}</td>
+                <td className="border px-4 py-2"><a className="resume-download" href={applicant.resumeUrl}>Download</a></td>
+
                 <td className="border px-4 py-2">
                   <button
                     onClick={() => handleViewMore(applicant)}
