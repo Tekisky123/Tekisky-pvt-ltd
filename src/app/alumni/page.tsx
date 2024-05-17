@@ -11,7 +11,7 @@ const Blog = () => {
   useEffect(() => {
     axios
       .get(
-        "https://tekisky-pvt-ltd-backend.onrender.com/selectedStudent/getSelectedStudent",
+        "https://tekisky-pvt-ltd-backend.vercel.app/selectedStudent/getSelectedStudent",
       )
       .then((response) => {
         const reversedData = response.data.reverse();
@@ -24,10 +24,13 @@ const Blog = () => {
 
   return (
     <>
+      <div className="">
       <Breadcrumb
         pageName="Selected Candidates"
-        description="Tekisky family wishes success and happiness"
+        description=""
       />
+      </div>
+      
 
       <section className="pb-[120px] pt-[120px]">
         <div className="container">

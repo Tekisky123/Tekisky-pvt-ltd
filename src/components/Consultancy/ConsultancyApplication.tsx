@@ -39,7 +39,7 @@ const ConsultancyApplications: React.FC = () => {
         const storedToken = localStorage.getItem("token");
         if (storedToken) {
           const response = await axios.get(
-            "https://tekisky-pvt-ltd-backend.onrender.com/consultancy/getAllUploadResume",
+            "https://tekisky-pvt-ltd-backend.vercel.app/consultancy/getAllUploadResume",
             {
               headers: {
                 Authorization: storedToken,
@@ -91,11 +91,13 @@ const ConsultancyApplications: React.FC = () => {
       <h1 className="mb-4 text-2xl font-bold">Consultancy Applications</h1>
       <input
         type="text"
-        placeholder="Search by name, or  experience"
+        placeholder="Search by name, Skills or experience"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className="search-input mb-4 rounded-md border border-gray-300 px-4 py-2"
+        
       />
+    
       <div className="overflow-x-auto">
         <table className="w-full table-auto">
           <thead>
@@ -133,8 +135,14 @@ const ConsultancyApplications: React.FC = () => {
                 <td className="border px-4 py-2">
                   {applicant.yearsOfExperience}
                 </td>
-                <td className="border px-4 py-2" style={{"width":"10px"}}>{applicant.skills}</td>
-                <td className="border px-4 py-2"><a className="resume-download" href={applicant.resumeUrl}>Download</a></td>
+                <td className="border px-4 py-2" style={{ width: "10px" }}>
+                  {applicant.skills}
+                </td>
+                <td className="border px-4 py-2">
+                  <a className="resume-download" href={applicant.resumeUrl}>
+                    Download
+                  </a>
+                </td>
 
                 <td className="border px-4 py-2">
                   <button

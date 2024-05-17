@@ -14,29 +14,30 @@ const menuData: Menu[] = [
     path: "/services",
     newTab: false,
   },
+  
   {
     id: 3,
-    title: "About",
-    path: "/about",
-    newTab: false,
-  },
-  {
-    id: 4,
     title: "Courses",
     path: "/courses",
     newTab: false,
   },
   {
-    id: 5,
+    id: 4,
     title: "Alumni",
     path: "/alumni",
     newTab: false,
   },
 
   {
-    id: 6,
+    id: 5,
     title: "Tekisky Consultancy",
     path: "/consultancy",
+    newTab: false,
+  },
+  {
+    id: 6,
+    title: "About",
+    path: "/about",
     newTab: false,
   },
   {

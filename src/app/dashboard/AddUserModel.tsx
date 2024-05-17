@@ -87,7 +87,7 @@ const AddUserModel: React.FC<ModalProps> = ({
 
     try {
       const response = await axios.post(
-        "https://tekisky-pvt-ltd-backend.onrender.com/user/create",
+        "https://tekisky-pvt-ltd-backend.vercel.app/user/create",
         formData,
         {
           headers: {

@@ -41,7 +41,7 @@ const AddStudentModal: React.FC<ModalProps> = ({ showModal, onClose,fetchStudent
     setShowLoader(true);
     try {
       const response = await axios.post(
-        "https://tekisky-pvt-ltd-backend.onrender.com/selectedStudent/create",
+        "https://tekisky-pvt-ltd-backend.vercel.app/selectedStudent/create",
         formData,
         {
           headers: {
@@ -62,8 +62,8 @@ const AddStudentModal: React.FC<ModalProps> = ({ showModal, onClose,fetchStudent
           companyName: "",
           designation: "",
         });
-        // Add the newly added student to the students array
-        setStudents((prevStudents) => [...prevStudents, response.data]);
+        // Call the fetchStudents function passed from Dashboard component
+        fetchStudents();
       } else {
         Swal.fire("Error!", "Failed to add student.", "error");
       }
@@ -73,6 +73,7 @@ const AddStudentModal: React.FC<ModalProps> = ({ showModal, onClose,fetchStudent
     }
     setShowLoader(false);
   };
+  
   
 
   return (

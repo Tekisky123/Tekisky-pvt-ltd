@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [showStudentModal, setShowStudentModal] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
   const [token, setToken] = useState("");
+  const [displayedStudents, setDisplayedStudents] = useState(5);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -21,23 +22,31 @@ const Dashboard = () => {
   const fetchStudents = async () => {
     try {
       const response = await axios.get(
-        "https://tekisky-pvt-ltd-backend.onrender.com/selectedStudent/getSelectedStudent",
+        "https://tekisky-pvt-ltd-backend.vercel.app/selectedStudent/getSelectedStudent",
         {
           headers: {
             Authorization: token,
           },
         },
       );
-      setStudents(response.data);
+      setStudents(response.data.reverse());
     } catch (error) {
       console.error("Error fetching students:", error);
     }
   };
 
+  const loadMoreStudents = () => {
+    setDisplayedStudents(displayedStudents + 5);
+  };
+
+  const viewLessStudents = () => {
+    setDisplayedStudents(5);
+  };
+
   const fetchUsers = async () => {
     try {
       const response = await axios.get(
-        "https://tekisky-pvt-ltd-backend.onrender.com/user/getAllUsers",
+        "https://tekisky-pvt-ltd-backend.vercel.app/user/getAllUsers",
         {
           headers: {
             Authorization: token,
@@ -69,7 +78,7 @@ const Dashboard = () => {
     if (confirmed.isConfirmed) {
       try {
         await axios.delete(
-          `https://tekisky-pvt-ltd-backend.onrender.com/user/delete/${id}`,
+          `https://tekisky-pvt-ltd-backend.vercel.app/user/delete/${id}`,
           {
             headers: {
               Authorization: token,
@@ -100,7 +109,7 @@ const Dashboard = () => {
     if (confirmed.isConfirmed) {
       try {
         await axios.delete(
-          `https://tekisky-pvt-ltd-backend.onrender.com/selectedStudent/delete/${id}`,
+          `https://tekisky-pvt-ltd-backend.vercel.app/selectedStudent/delete/${id}`,
           {
             headers: {
               Authorization: token,
@@ -134,11 +143,11 @@ const Dashboard = () => {
       />
       <div className="mb-8 ">
         <h2 className="mb-2 text-xl font-semibold">Selected Students</h2>
-        <div className="overflow-x-auto bg-white  dark:bg-dark">
-          <table className="min-w-full divide-y divide-gray-200 border-2 bg-white  dark:bg-dark">
-            <thead className="bg-gray-50   bg-white  dark:bg-dark">
+        <div className="overflow-x-auto bg-white">
+          <table className="min-w-full divide-y divide-gray-200 border-2 bg-white">
+            <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 ">
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                   Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
@@ -155,10 +164,10 @@ const Dashboard = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200 text-black dark:text-white">
-              {students.map((student) => (
+            <tbody className="divide-y divide-gray-200">
+              {students.slice(0, displayedStudents).map((student) => (
                 <tr key={student.id}>
-                  <td className="whitespace-nowrap px-6 py-4 ">
+                  <td className="whitespace-nowrap px-6 py-4">
                     {student.name}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
@@ -172,8 +181,7 @@ const Dashboard = () => {
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
                     <button
-                      className="mr-
-                      2 rounded-md bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+                      className="mr-2 rounded-md bg-red-500 px-4 py-2 text-white hover:bg-red-600"
                       onClick={() => handleDeleteStudent(student._id)}
                     >
                       Delete
@@ -183,6 +191,21 @@ const Dashboard = () => {
               ))}
             </tbody>
           </table>
+          {students.length > displayedStudents ? (
+            <button
+              onClick={loadMoreStudents}
+              className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 mt-5 "
+            >
+              Load More
+            </button>
+          ) : (
+            <button
+              onClick={viewLessStudents}
+              className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 mt-5 "
+            >
+              View Less
+            </button>
+          )}
         </div>
       </div>
 

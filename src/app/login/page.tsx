@@ -16,7 +16,7 @@ const SigninPage = () => {
     setShowLoader(true);
     try {
       const response = await axios.post(
-        "https://tekisky-pvt-ltd-backend.onrender.com/user/login",
+        "https://tekisky-pvt-ltd-backend.vercel.app/user/login",
         { mobileNumber, password },
       );
       const { token } = response.data;

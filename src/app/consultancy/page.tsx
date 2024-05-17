@@ -118,7 +118,7 @@ const Form = () => {
         }
       }
       await axios.post(
-        "https://tekisky-pvt-ltd-backend.onrender.com/consultancy/uploadResume",
+        "https://tekisky-pvt-ltd-backend.vercel.app/consultancy/uploadResume",
         formDataToSend,
       );
       Swal.fire({

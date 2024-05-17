@@ -51,7 +51,7 @@ const Contact = () => {
     setShowLoader(true);
     try {
       const response = await axios.post(
-        "https://tekisky-pvt-ltd-backend.onrender.com/submitForm",
+        "https://tekisky-pvt-ltd-backend.vercel.app/email/sendEmail",
         formData,
       );
       if (response.status === 200) {
