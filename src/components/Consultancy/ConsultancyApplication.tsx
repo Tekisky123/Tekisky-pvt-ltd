@@ -135,8 +135,19 @@ const ConsultancyApplications: React.FC = () => {
                 <td className="border px-4 py-2">
                   {applicant.yearsOfExperience}
                 </td>
-                <td className="border px-4 py-2" style={{ width: "10px" }}>
-                  {applicant.skills}
+                <td className="border px-4 py-2 w-80" >
+                  <div className="flex flex-wrap gap-1 w-75 " >
+                    {applicant.skills.map((skillString) =>
+                      skillString.split(",").map((skill, index) => (
+                        <div
+                          key={index}
+                          className="rounded bg-blue-200 px-2 py-1 text-sm text-blue-700"
+                        >
+                          {skill.trim()}
+                        </div>
+                      ))
+                    )}
+                  </div>
                 </td>
                 <td className="border px-4 py-2">
                   <a className="resume-download" href={applicant.resumeUrl}>

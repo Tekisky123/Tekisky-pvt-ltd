@@ -16,7 +16,21 @@ const featuresData: Feature[] = [
     paragraph: `Learn the MERN stack: MongoDB, Express, React, and Node.js, to build powerful and modern web applications, Syllabus includes HTML, CSS, JavaScript, React.js, and Node.js.Ideal for aspiring full-stack developers looking to master the latest technologies in web development.`,
   },
   {
-    id: 1,
+    id: 2, 
+    image: (
+      <Image
+        src="/images/blog/mernwithPy&DSA.png" // Add the appropriate image path
+        alt="MERN Full Stack with Python and DSA"
+        className="service-img"
+        width={600}
+        height={500}
+      />
+    ),
+    title: "MERN Full Stack with Python and DSA",
+    paragraph: `Combine the power of the MERN stack with Python and Data Structures & Algorithms (DSA). Learn to build full-stack applications while mastering Python for backend development and DSA for optimizing code performance. Ideal for developers aiming to enhance their skill set with versatile technologies.`,
+  },
+  {
+    id: 3,
     image: (
       <Image
         src="/images/blog/960x0.webp"
@@ -32,7 +46,7 @@ Topics cover artificial intelligence and machine learning.
 Perfect for individuals interested in analyzing and interpreting data to drive business decisions.`,
   },
   {
-    id: 1,
+    id: 4,
     image: (
       <Image
         src="/images/blog/1679683081898.png"
@@ -48,7 +62,7 @@ Perfect for individuals interested in analyzing and interpreting data to drive b
          Suitable for beginners aiming to kickstart their career in web development.`,
   },
   {
-    id: 1,
+    id: 5,
     image: (
       <Image
         src="/images/blog/0_TrneyH4gnbEHvgGM.png"
