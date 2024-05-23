@@ -43,7 +43,7 @@ const Slider = () => {
     if (!isBigScreen) {
       const intervalId = setInterval(() => {
         setCurrentSlide((prevSlide) => (prevSlide + 1) % smallScreenImages.length);
-      }, 5000);
+      }, 3000);
       return () => clearInterval(intervalId);
     }
   }, [currentSlide, isBigScreen]);
@@ -63,14 +63,14 @@ const Slider = () => {
                 style={{ flex: '0 0 100%' }}
               >
                 <div className="w-full flex items-center justify-center">
-                  <Image
-                    src={slide.imageUrl}
-                    alt={slide.title}
-                    layout="responsive"
-                    width={300}
-                    height={500}
-                    objectFit="cover"
-                  />
+                <img
+  src={slide.imageUrl}
+  alt={slide.title}
+  width={300}
+  height={500}
+  style={{ width: '100%', height: '100%', objectFit: 'cover' }} // Optional inline style to ensure consistent sizing and object fit
+/>
+
                 </div>
               </div>
             ))}

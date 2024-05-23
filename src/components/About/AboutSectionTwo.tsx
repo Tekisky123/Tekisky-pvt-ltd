@@ -11,12 +11,12 @@ const AboutSectionTwo = () => {
               className="relative mx-auto mb-12 aspect-[25/24] max-w-[600px] text-center lg:m-0"
               data-wow-delay=".15s"
             >
-              <Image
-                src="/images/hero/Helping a partner-bro.svg"
-                alt="about image"
-                fill
-                className="drop-shadow-three  dark:drop-shadow-none"
-              />
+         <img
+      src="/images/hero/Helping a partner-bro.svg"
+      alt="about image"
+      className="drop-shadow-three dark:drop-shadow-none"
+      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+    />
               {/* <Image
                 src="/images/about/about-image-2-dark.svg"
                 alt="about image"
@@ -117,12 +117,13 @@ const AboutSectionTwo = () => {
               className="relative mx-auto mb-12 aspect-[25/24] max-w-[700px] text-center lg:m-0"
               data-wow-delay=".15s"
             >
-              <Image
-                src="/images/hero/Team work-amico.svg"
-                alt="about image"
-                fill
-                className="drop-shadow-three dark:drop-shadow-none"
-              />
+             <img
+  src="/images/hero/Team work-amico.svg"
+  alt="about image"
+  className="drop-shadow-three dark:drop-shadow-none"
+  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+/>
+
             </div>
           </div>
         </div>

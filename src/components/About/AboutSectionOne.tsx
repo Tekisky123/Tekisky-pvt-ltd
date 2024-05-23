@@ -22,22 +22,23 @@ const AboutSectionOne = () => {
       <div className="container">
         <div className="border-b border-body-color/[.15]  dark:border-white/[.15] ">
           <div className="-mx-4 flex flex-wrap items-center">
-          <div className="relative mx-auto  max-w-[700px] ">
-                <Image
-                  src="/images/hero/Company-pana.svg"
-                  alt="about-image"
-                  width={650}
-                  height={80}
-                  className="mx-auto max-w-full drop-shadow-three  dark:drop-shadow-none lg:mr-0"
-                />
-                {/* <Image
+            <div className="relative mx-auto  max-w-[700px] ">
+              <img
+                src="/images/hero/Company-pana.svg"
+                alt="about-image"
+                width="650"
+                height="80"
+                className="mx-auto max-w-full drop-shadow-three dark:drop-shadow-none lg:mr-0"
+              />
+
+              {/* <Image
                   src="/images/about/about-image-dark.svg"
                   alt="about-image"
                   fill
                   className="mx-auto hidden max-w-full drop-shadow-three dark:block dark:drop-shadow-none lg:mr-0"
                 /> */}
-              </div>
-            
+            </div>
+
             <div className="w-full px-4 lg:w-1/2">
               <SectionTitle
                 title="Who We Are"
@@ -45,10 +46,7 @@ const AboutSectionOne = () => {
                 mb="44px"
               />
 
-              <div
-                className="mb-8 max-w-[570px] lg:mb-0"
-                data-wow-delay=".15s"
-              >
+              <div className="mb-8 max-w-[570px] lg:mb-0" data-wow-delay=".15s">
                 <h3 className="mb-6 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
                   Our Expertise
                 </h3>
@@ -70,9 +68,7 @@ const AboutSectionOne = () => {
               </div>
             </div>
 
-            <div className="w-full px-4 lg:w-1/2">
-             
-            </div>
+            <div className="w-full px-4 lg:w-1/2"></div>
           </div>
         </div>
       </div>

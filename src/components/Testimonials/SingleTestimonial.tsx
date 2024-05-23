@@ -14,7 +14,8 @@ const SingleTestimonial = ({ testimonial }: { testimonial: Testimonial }) => {
     <div className="w-full">
       <div className="h-auto rounded-sm bg-white p-8 shadow-two duration-300 hover:shadow-one dark:bg-dark dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
         <div className="relative mr-4 h-[200px] w-full max-w-[400px] overflow-hidden">
-          <Image src={image} alt={name} fill />
+        <img src={image} alt={name} style={{ width: '100%', height: '100%' }} />
+
         </div>
         <h1 className="mb-5 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg mt-5 ">
           {name}

@@ -38,18 +38,19 @@ const SingleCompany = ({ Company }: { Company: company }) => {
         rel="nofollow noreferrer"
         className="relative h-40 w-60"
       >
-        <Image
-          src={imageLight}
-          alt={name}
-          fill
-          className="company-logo hidden dark:block"
-        />
-        <Image
-          src={image}
-          alt={name}
-          fill
-          className="company-logo block dark:hidden"
-        />
+       <img
+  src={imageLight}
+  alt={name}
+  className="company-logo hidden dark:block"
+  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+/>
+<img
+  src={image}
+  alt={name}
+  className="company-logo block dark:hidden"
+  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+/>
+
       </a>
     </div>
   );

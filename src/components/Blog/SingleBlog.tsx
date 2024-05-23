@@ -10,16 +10,17 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
         href=""
         className="profile-container relative m-5 block flex aspect-[4/4] w-full items-center justify-center "
       >
-        <Image
-          src={
-            gender === "male"
-              ? "/images/blog/boy (2).png"
-              : "/images/blog/woman.png"
-          }
-          alt="image"
-          fill
-          className="profiles"
-        />
+       <img
+  src={
+    gender === "male"
+      ? "/images/blog/boy (2).png"
+      : "/images/blog/woman.png"
+  }
+  alt="image"
+  className="profiles"
+  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+/>
+
       </Link>
       <div className="p-6 sm:p-8 md:px-6 md:py-8 lg:p-8 xl:px-5 xl:py-8 2xl:p-8">
         <h3>

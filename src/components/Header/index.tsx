@@ -74,20 +74,24 @@ const Header = () => {
                   sticky ? "py-5 lg:py-2" : "py-8"
                 } `}
               >
-                <Image
-                  src="/images/logo/WhatsApp_Image_2024-04-30_at_12.39.09_86de1ffc-removebg-preview.png"
-                  alt="logo"
-                  width={130}
-                  height={30}
-                  className="w-full dark:hidden"
-                />
-                <Image
-                  src="/images/logo/WhatsApp_Image_2024-04-30_at_12.40.11_bdbde839-removebg-preview.png"
-                  alt="logo"
-                  className="hidden w-full dark:block"
-                  width={130}
-                  height={30}
-                />
+               <img
+  src="/images/logo/WhatsApp_Image_2024-04-30_at_12.39.09_86de1ffc-removebg-preview.png"
+  alt="logo"
+  width={130}
+  height={30}
+  className="w-full dark:hidden"
+ 
+/>
+
+<img
+  src="/images/logo/WhatsApp_Image_2024-04-30_at_12.40.11_bdbde839-removebg-preview.png"
+  alt="logo"
+  className="hidden w-full dark:block"
+  width={130}
+  height={30}
+  
+/>
+
               </Link>
             </div>
             <div className="flex w-full items-center justify-between px-4">

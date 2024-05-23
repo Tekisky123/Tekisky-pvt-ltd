@@ -26,8 +26,8 @@ const Form = () => {
     skills: [],
     yearsOfExperience: "",
     resume: null,
+    interestedInMockInterview: false,
   });
-
 
   const [loading, setLoading] = useState(false);
 
@@ -38,9 +38,12 @@ const Form = () => {
     if (name === "mobileNumber" && value.length > 10) {
       return;
     }
+    // If the field is interestedInMockInterview, parse the value to boolean
+    const newValue =
+      name === "interestedInMockInterview" ? value === "true" : value;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
@@ -78,7 +81,7 @@ const Form = () => {
       "yearsOfExperience",
       "yearOfPassing",
       "skills",
-      "resume"
+      "resume",
     ];
     const missingFields = requiredFields.filter((field) => !formData[field]);
     if (missingFields.length > 0) {
@@ -101,7 +104,7 @@ const Form = () => {
       return;
     }
 
-    setLoading(true)
+    setLoading(true);
     try {
       const formDataToSend = new FormData();
       console.log(formDataToSend);
@@ -393,7 +396,6 @@ const Form = () => {
             <div className="mt-2">
               <input
                 type="text"
-                
                 id="degreeName"
                 name="degreeName"
                 placeholder="Enter Name of Degree"
@@ -531,6 +533,48 @@ const Form = () => {
                 onChange={handleChange}
                 className="block w-full rounded-md border-0 px-3  py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
               />
+            </div>
+          </div>
+
+          <div className="col-span-full mb-10">
+            <label className="mb-2 block text-sm font-medium text-black dark:text-white">
+              Are You Interested in giving a mock interview?
+            </label>
+            <div className="flex items-center space-x-4">
+              <div>
+                <input
+                  type="radio"
+                  id="interestedInMockInterviewYes"
+                  name="interestedInMockInterview"
+                  value="true"
+                  checked={formData.interestedInMockInterview === true}
+                  onChange={handleChange}
+                  className="h-5 w-5 rounded border-gray-300 text-green-500 focus:ring-green-400"
+                />
+                <label
+                  htmlFor="interestedInMockInterviewYes"
+                  className="ml-1 block text-sm font-medium text-black dark:text-white"
+                >
+                  Yes
+                </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="interestedInMockInterviewNo"
+                  name="interestedInMockInterview"
+                  value="false"
+                  checked={formData.interestedInMockInterview === false}
+                  onChange={handleChange}
+                  className="h-5 w-5 rounded border-gray-300 text-red-500 focus:ring-red-400"
+                />
+                <label
+                  htmlFor="interestedInMockInterviewNo"
+                  className="ml-1 block text-sm font-medium text-black dark:text-white"
+                >
+                  No
+                </label>
+              </div>
             </div>
           </div>
 

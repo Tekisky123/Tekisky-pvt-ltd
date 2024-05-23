@@ -22,12 +22,13 @@ const Video = () => {
               className="relative mx-auto mb-12 aspect-[35/24] max-w-[700px] text-center lg:m-0"
               data-wow-delay=".15s"
             >
-              <Image
-                src="/images/hero/Coding workshop-bro.svg"
-                alt="about image"
-                fill
-                className="content-image  drop-shadow-three dark:drop-shadow-none"
-              />
+            <img
+  src="/images/hero/Coding workshop-bro.svg"
+  alt="about image"
+  className="content-image drop-shadow-three dark:drop-shadow-none"
+  style={{ width: '100%', height: '100%' }}
+/>
+
             </div>
           </div>
           <div className="w-full px-4 lg:w-1/2">

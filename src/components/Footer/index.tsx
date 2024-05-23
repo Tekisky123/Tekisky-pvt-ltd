@@ -11,20 +11,24 @@ const Footer = () => {
             <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-5/12">
               <div className=" max-w-[360px] ">
                 <Link href="/" className="mb-8 inline-block">
-                  <Image
-                    src="/images/logo/WhatsApp_Image_2024-04-30_at_12.39.09_86de1ffc-removebg-preview.png"
-                    alt="logo"
-                    className="w-full dark:hidden "
-                    width={140}
-                    height={30}
-                  />
-                  <Image
-                    src="/images/logo/WhatsApp_Image_2024-04-30_at_12.40.11_bdbde839-removebg-preview.png"
-                    alt="logo"
-                    className="hidden w-full dark:block"
-                    width={140}
-                    height={30}
-                  />
+                <img
+  src="/images/logo/WhatsApp_Image_2024-04-30_at_12.39.09_86de1ffc-removebg-preview.png"
+  alt="logo"
+  className="w-full dark:hidden"
+  width={140}
+  height={30}
+ 
+/>
+
+<img
+  src="/images/logo/WhatsApp_Image_2024-04-30_at_12.40.11_bdbde839-removebg-preview.png"
+  alt="logo"
+  className="hidden w-full dark:block"
+  width={140}
+  height={30}
+ 
+/>
+
                 </Link>
               </div>
             </div>

@@ -36,13 +36,15 @@ const Hero = () => {
             <div className="order-1 mb-0 mt-5 flex w-full justify-center px-4 md:order-2 md:w-1/2 md:justify-end">
               <div className="md:block">
                 <div className="flex justify-end">
-                  <Image
-                    src="/images/hero/Coding workshop-amico.svg"
-                    alt="Your Image"
-                    width={600}
-                    className="hero-section-img"
-                    height={500}
-                  />
+                <img
+  src="/images/hero/Coding workshop-amico.svg"
+  alt="Your Image"
+  width={600}
+  height={500}
+  className="hero-section-img"
+  
+/>
+
                 </div>
               </div>
             </div>

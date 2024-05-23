@@ -16,7 +16,12 @@ const RelatedPost = ({
     <div className="flex items-center lg:block xl:flex">
       <div className="mr-5 lg:mb-3 xl:mb-0">
         <div className="relative h-[60px] w-[70px] overflow-hidden rounded-md sm:h-[75px] sm:w-[85px]">
-          <Image src={image} alt={title} fill className="social-logo" />
+        <img
+  src={image}
+  alt={title}
+  className="social-logo"
+  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+/>
         </div>
       </div>
       <div className="w-full">
