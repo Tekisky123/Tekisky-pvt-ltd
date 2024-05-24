@@ -116,6 +116,7 @@ const AddUserModel: React.FC<ModalProps> = ({
       Swal.fire("Error!", errorMessage, "error");
     }
     setShowLoader(false);
+    fetchUsers()
   };
 
   return (

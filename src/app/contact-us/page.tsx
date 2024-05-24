@@ -5,7 +5,6 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact Us",
   description: "This is Contact Us Page Of Tekisky Pvt Ltd",
-  // other metadata
 };
 
 const BlogSidebarPage = () => {
@@ -77,32 +76,42 @@ const BlogSidebarPage = () => {
                 </h3>
                 <ul className="p-8">
                   <li className="mb-6 border-b border-body-color border-opacity-10 pb-6 dark:border-white dark:border-opacity-10">
-                    <RelatedPost
-                      title="Instagram"
-                      image="/images/blog/instagram-new-logo-chisinau-moldova-september-instagram-new-logo-printed-white-paper-instagram-online-mobile-photo-128373447.webp"
-                      slug="#"
-                    />
+                    <a
+                      href="https://www.instagram.com/tekisky.pvt.ltd/?igsh=NTc4MTIwNjQ2YQ%3D%3D"
+                      target="_blank"
+                    >
+                      <RelatedPost
+                        title="Instagram"
+                        image="/images/blog/instagram-new-logo-chisinau-moldova-september-instagram-new-logo-printed-white-paper-instagram-online-mobile-photo-128373447.webp"
+                      />
+                    </a>
                   </li>
                   <li className="mb-6 border-b border-body-color border-opacity-10 pb-6 dark:border-white dark:border-opacity-10">
-                    <RelatedPost
-                      title="Facebook"
-                      image="/images/blog/new-facebook-logo-2019.jpg"
-                      slug="#"
-                    />
+                    <a href="" target="_blank">
+                      <RelatedPost
+                        title="Facebook"
+                        image="/images/blog/new-facebook-logo-2019.jpg"
+                      />
+                    </a>
                   </li>
                   <li className="mb-6 border-b border-body-color border-opacity-10 pb-6 dark:border-white dark:border-opacity-10">
-                    <RelatedPost
-                      title="Twitter"
-                      image="/images/blog/4fd07cea5c3e3c0d810000db.format-webp.width-1440_0ygTbhgMQscB5N8u.webp"
-                      slug="#"
-                    />
+                    <a href="https://x.com/tekiskypvtldt" target="_blank">
+                      <RelatedPost
+                        title="Twitter"
+                        image="/images/blog/4fd07cea5c3e3c0d810000db.format-webp.width-1440_0ygTbhgMQscB5N8u.webp"
+                      />
+                    </a>
                   </li>
                   <li>
-                    <RelatedPost
-                      title="Linkedin"
-                      image="/images/blog/free-linkedin-logo-vector-r3cq0.webp"
-                      slug="#"
-                    />
+                    <a
+                      href="https://www.linkedin.com/company/tekisky-pvt-ltd/posts/?feedView=all"
+                      target="_blank"
+                    >
+                      <RelatedPost
+                        title="Linkedin"
+                        image="/images/blog/free-linkedin-logo-vector-r3cq0.webp"
+                      />
+                    </a>
                   </li>
                 </ul>
               </div>

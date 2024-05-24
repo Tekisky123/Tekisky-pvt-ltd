@@ -72,6 +72,7 @@ const AddStudentModal: React.FC<ModalProps> = ({ showModal, onClose,fetchStudent
       Swal.fire("Error!", "Failed to add student.", "error");
     }
     setShowLoader(false);
+    fetchStudents();
   };
   
   
