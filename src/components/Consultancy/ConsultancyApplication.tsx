@@ -229,6 +229,7 @@ const ConsultancyApplications: React.FC = () => {
       console.error("Error deleting applicant:", error);
     }
   };
+  
   const handleShare = (applicantId: string) => {
     const applicationUrl = `${window.location.origin}/singleApplication/${applicantId}`;
     navigator.clipboard.writeText(applicationUrl).then(() => {

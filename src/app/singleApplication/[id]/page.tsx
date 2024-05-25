@@ -201,6 +201,18 @@ const SingleApplicationPage = () => {
               )}
             </div>
           </td>
+          <div className="mt-10">
+          <h2 className="text-xl font-semibold mb-2 text-gray-700">Additional Details</h2>
+          <table className="w-full mb-4">
+            <tbody>
+              
+              <tr>
+                <td className="font-semibold">Resume:</td>
+                <td><a href={application.resumeUrl} target="_blank" className="text-blue-500 underline">View Resume</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         </div>
       </div>
     </div>
