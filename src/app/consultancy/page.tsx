@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import SectionTitle from "@/components/Common/SectionTitle";
@@ -9,36 +9,91 @@ import { useRouter } from "next/navigation";
 
 const Form = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
+  const initialFormData =
+    typeof localStorage !== "undefined" && localStorage.getItem("formData")
+      ? JSON.parse(localStorage.getItem("formData"))
+      : {
+          employeeNumber: "",
+          fullName: "",
+          email: "",
+          mobileNumber: "",
+          tenthPercentage: "",
+          twelthPercentage: "",
+          twelthCollegeName: "",
+          diplomaPercentage: "",
+          diplomaCollegeName: "",
+          degreePercentage: "",
+          degreeName: "",
+          degreeCollegeName: "",
+          yearOfPassing: "",
+          skills: [],
+          yearsOfExperience: "",
+          resume: null,
+          interestedInMockInterview: false,
+        };
+  const [formData, setFormData] = useState(initialFormData);
+  useEffect(() => {
+    localStorage.setItem("formData", JSON.stringify(formData));
+  }, [formData]);
+
+  const [loading, setLoading] = useState(false);
+
+  const [errors, setErrors] = useState({
     employeeNumber: "",
     fullName: "",
     email: "",
     mobileNumber: "",
     tenthPercentage: "",
-    twelthPercentage: "",
-    twelthCollegeName: "",
-    diplomaPercentage: "",
-    diplomaCollegeName: "",
-    degreePercentage: "",
-    degreeName: "",
-    degreeCollegeName: "",
-    yearOfPassing: "",
-    skills: [],
-    yearsOfExperience: "",
-    resume: null,
-    interestedInMockInterview: false,
   });
-
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
+    let error = "";
+
+    if (name === "employeeNumber") {
+      if (value.length > 6 || isNaN(Number(value))) {
+        error = "Employee number must be a 6-digit number.";
+      }
+    }
+    if (
+      name === "tenthPercentage" &&
+      (value.length > 3 || isNaN(Number(value)))
+    ) {
+      error = "Please enter a valid percentage (up to 3 digits).";
+    }
+
+    if (name === "fullName") {
+      if (value.length > 30) {
+        error = "Full name must be less than 30 characters.";
+      }
+      if (!/^[a-zA-Z\s]*$/.test(value)) {
+        error = "Full name must contain only letters.";
+      }
+    }
+
+    if (name === "email") {
+      if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)) {
+        error = "Please enter a valid email address.";
+      }
+    }
+
+    if (name === "mobileNumber") {
+      if (value.length > 10 || isNaN(Number(value))) {
+        error = "Mobile number must be a 10-digit number.";
+      }
+    }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
+
     if (name === "mobileNumber" && value.length > 10) {
       return;
     }
-    // If the field is interestedInMockInterview, parse the value to boolean
+
     const newValue =
       name === "interestedInMockInterview" ? value === "true" : value;
     setFormData((prevState) => ({
@@ -54,7 +109,6 @@ const Form = () => {
       resume: file,
     }));
 
-    // Display the preview of the selected file
     const preview = document.getElementById("file-preview");
     if (preview && file) {
       if (file.type === "application/pdf") {
@@ -93,7 +147,6 @@ const Form = () => {
       return;
     }
 
-    // Validate mobile number format
     const mobileNumberPattern = /^\d{10}$/;
     if (!mobileNumberPattern.test(formData.mobileNumber)) {
       Swal.fire({
@@ -110,13 +163,10 @@ const Form = () => {
       console.log(formDataToSend);
       for (const key in formData) {
         if (key === "skills") {
-          // Convert selectedSkills array to a comma-separated string and append it to formDataToSend
           formDataToSend.append(key, selectedSkills.join(","));
         } else if (key === "resume" && formData[key]) {
-          // Append resume file only if it exists
           formDataToSend.append(key, formData[key]);
         } else {
-          // For other fields, append values directly
           formDataToSend.append(key, formData[key as keyof typeof formData]);
         }
       }
@@ -124,6 +174,7 @@ const Form = () => {
         "https://tekisky-pvt-ltd-backend.vercel.app/consultancy/uploadResume",
         formDataToSend,
       );
+      localStorage.removeItem("formData");
       Swal.fire({
         icon: "success",
         title: "Your Form Submitted Successfully!",
@@ -168,8 +219,8 @@ const Form = () => {
   const handleSkillSelect = (skill: string) => {
     if (!selectedSkills.includes(skill)) {
       setSelectedSkills([...selectedSkills, skill]);
-      setSearchTerm(""); // Clear input text after selecting a skill
-      setFilteredSkills([]); // Clear the filtered skills array
+      setSearchTerm("");
+      setFilteredSkills([]);
     }
   };
 
@@ -216,10 +267,16 @@ const Form = () => {
                     id="employeeNumber"
                     name="employeeNumber"
                     placeholder="Enter Your Emp ID"
+                    maxLength={6}
                     value={formData.employeeNumber}
                     onChange={handleChange}
                     className="block w-full rounded-md border-0 px-3 py-1.5  text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
                   />
+                  {errors.employeeNumber && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {errors.employeeNumber}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -236,11 +293,17 @@ const Form = () => {
                     type="text"
                     id="fullName"
                     name="fullName"
+                    maxLength={30}
                     placeholder="Enter Your Full Name"
                     value={formData.fullName}
                     onChange={handleChange}
                     className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
                   />
+                  {errors.fullName && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {errors.fullName}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -261,6 +324,9 @@ const Form = () => {
                     onChange={handleChange}
                     className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
                   />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                  )}
                 </div>
               </div>
               <div className="col-span-full">
@@ -281,6 +347,11 @@ const Form = () => {
                     onChange={handleChange}
                     className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
                   />
+                  {errors.mobileNumber && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {errors.mobileNumber}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -295,12 +366,18 @@ const Form = () => {
                   <input
                     type="number"
                     id="tenthPercentage"
+                    pattern="\d*"
                     placeholder="Enter Your 10th Percentage"
                     name="tenthPercentage"
                     value={formData.tenthPercentage}
                     onChange={handleChange}
                     className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
                   />
+                  {errors.tenthPercentage && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {errors.tenthPercentage}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -313,12 +390,14 @@ const Form = () => {
                 </label>
                 <div className="mt-2">
                   <input
-                    type="number"
+                    type="text"
                     id="twelthPercentage"
                     name="twelthPercentage"
                     placeholder="Enter Your 12th Percentage"
                     value={formData.twelthPercentage}
                     onChange={handleChange}
+                    maxLength={3}
+                    pattern="\d{1,3}"
                     className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -338,6 +417,7 @@ const Form = () => {
                     name="twelthCollegeName"
                     value={formData.twelthCollegeName}
                     onChange={handleChange}
+                    maxLength={35}
                     className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -356,12 +436,13 @@ const Form = () => {
             </label>
             <div className="mt-2">
               <input
-                type="number"
+                type="text"
                 id="diplomaPercentage"
                 name="diplomaPercentage"
                 placeholder="Enter Diploma Percentage"
                 value={formData.diplomaPercentage}
                 onChange={handleChange}
+                maxLength={4}
                 className="block w-full rounded-md border-0 px-3  py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
               />
             </div>
@@ -381,6 +462,7 @@ const Form = () => {
                 placeholder="Enter Diploma College Name"
                 value={formData.diplomaCollegeName}
                 onChange={handleChange}
+                maxLength={35}
                 className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
               />
             </div>
@@ -401,6 +483,7 @@ const Form = () => {
                 placeholder="Enter Name of Degree"
                 value={formData.degreeName}
                 onChange={handleChange}
+                maxLength={8}
                 className="block w-full rounded-md border-0 px-3  py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
               />
             </div>
@@ -421,6 +504,7 @@ const Form = () => {
                 placeholder="Enter Degree Percentage"
                 value={formData.degreePercentage}
                 onChange={handleChange}
+                maxLength={8}
                 className="block w-full rounded-md border-0 px-3  py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
               />
             </div>
@@ -441,6 +525,7 @@ const Form = () => {
                 placeholder="Enter Degree College/University Name"
                 value={formData.degreeCollegeName}
                 onChange={handleChange}
+                maxLength={35}
                 className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
               />
             </div>
@@ -460,12 +545,13 @@ const Form = () => {
                 placeholder="Enter Year of Passing"
                 value={formData.yearOfPassing}
                 onChange={handleChange}
+                maxLength={4}
                 className="block w-full rounded-md border-0 px-3  py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
               />
             </div>
           </div>
 
-          <div className="col-span-full mb-10 ">
+          <div className="col-span-full mb-10">
             <div className="flex flex-col">
               <label
                 htmlFor="skills"
@@ -479,19 +565,19 @@ const Form = () => {
                   placeholder="Search for a skill..."
                   value={searchTerm}
                   onChange={handleSkillChange}
-                  className="mb-4 w-full rounded-md border border-gray-300 px-3 py-2 text-black  dark:bg-dark dark:text-white"
+                  className="mb-4 w-full rounded-md border border-gray-300 px-3 py-2 text-black dark:bg-dark dark:text-white"
                 />
               </div>
               <div className="flex flex-wrap">
                 {selectedSkills.map((skill, index) => (
                   <div
                     key={index}
-                    className="selected-skill mb-2 mr-2 flex items-center rounded-md border border-gray-100 px-2 py-1"
+                    className="selected-skill mb-2 mr-2 flex items-center rounded-md border border-gray-100 bg-green-100 px-2 py-1"
                   >
                     <span className="mr-1">{skill}</span>
                     <button
                       onClick={() => handleSkillRemove(skill)}
-                      className="ml-1"
+                      className="ml-1 focus:outline-none"
                     >
                       &times;
                     </button>
@@ -530,6 +616,7 @@ const Form = () => {
                 name="yearsOfExperience"
                 placeholder="Enter Year of Experience (Ex: 1 Year , 2 Year..) "
                 value={formData.yearsOfExperience}
+                maxLength={10}
                 onChange={handleChange}
                 className="block w-full rounded-md border-0 px-3  py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
               />

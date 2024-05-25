@@ -270,8 +270,25 @@ const Dashboard = () => {
                     </td>
                   </tr>
                 ))}
+                
               </tbody>
+              
             </table>
+            {students.length > displayedStudents ? (
+              <button
+                onClick={loadMoreStudents}
+                className="mt-5 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+              >
+                Load More
+              </button>
+            ) : (
+              <button
+                onClick={viewLessStudents}
+                className="mt-5 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+              >
+                View Less
+              </button>
+            )}
           </div>
         </div>
       )}
