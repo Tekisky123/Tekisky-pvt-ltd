@@ -49,7 +49,7 @@ const ConsultancyApplications: React.FC = () => {
       const storedToken = localStorage.getItem("token");
       if (storedToken) {
         const response = await axios.get(
-          "http://localhost:7000/consultancy/getAllUploadResume",
+          "https://tekisky-pvt-ltd-backend.vercel.app/consultancy/getAllUploadResume",
           {
             headers: {
               Authorization: storedToken,
@@ -71,7 +71,7 @@ const ConsultancyApplications: React.FC = () => {
   const handleViewMore = async (applicant: Applicant) => {
     try {
       const response = await axios.get(
-        `http://localhost:7000/consultancy/getoneuploadresume/${applicant._id}`,
+        `https://tekisky-pvt-ltd-backend.vercel.app/consultancy/getoneuploadresume/${applicant._id}`,
       );
       const data = response.data;
       console.log("Fetched applicant details:", data);
@@ -100,7 +100,7 @@ const ConsultancyApplications: React.FC = () => {
         });
 
         await axios.post(
-          `http://localhost:7000/consultancy/getoneuploadresumeandupdate/${selectedApplicant._id}`,
+          `https://tekisky-pvt-ltd-backend.vercel.app/consultancy/getoneuploadresumeandupdate/${selectedApplicant._id}`,
           {
             rating: selectedApplicant.rating,
             status: selectedApplicant.status,

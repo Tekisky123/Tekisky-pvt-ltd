@@ -215,7 +215,7 @@ const Form = () => {
         }
       }
       await axios.post(
-        "http://localhost:7000/consultancy/uploadResume",
+        "https://tekisky-pvt-ltd-backend.vercel.app/consultancy/uploadResume",
         formDataToSend,
       );
       localStorage.removeItem("formData");

@@ -39,7 +39,7 @@ const SubmitAssessment = () => {
       });
 
       const response = await axios.post(
-        `http://localhost:7000/consultancy/submitAssessment/${id}`,
+        `https://tekisky-pvt-ltd-backend.vercel.app/consultancy/submitAssessment/${id}`,
         formData,
         {
           headers: {

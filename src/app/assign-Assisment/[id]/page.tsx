@@ -108,7 +108,7 @@ const AssignmentForm: React.FC = () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       const response = await axios.post(
-        `http://localhost:7000/consultancy/assignAssessment/${id}`,
+        `https://tekisky-pvt-ltd-backend.vercel.app/consultancy/assignAssessment/${id}`,
         formData,
       );
 

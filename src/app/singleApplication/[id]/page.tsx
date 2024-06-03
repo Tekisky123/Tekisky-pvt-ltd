@@ -45,7 +45,7 @@ const SingleApplicationPage = () => {
     const fetchApplication = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:7000/consultancy/getoneuploadresume/${id}`,
+          `https://tekisky-pvt-ltd-backend.vercel.app/consultancy/getoneuploadresume/${id}`,
         );
         setApplication(response.data);
       } catch (error) {
