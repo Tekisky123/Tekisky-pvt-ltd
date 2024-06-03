@@ -21,7 +21,13 @@ interface Applicant {
   skills: string[];
   yearsOfExperience: string;
   resumeUrl: string;
-  interestedInMockInterview?: boolean;
+  workStatus: string;
+  referredBy: string;
+  extraInformation: string;
+  englishSpeaking: string;
+  englishWriting: string;
+  mockInterviewDate: string;
+  mockInterviewTime: string;
   rating?: number;
   status?: string;
   comments?: string;
@@ -39,7 +45,7 @@ const SingleApplicationPage = () => {
     const fetchApplication = async () => {
       try {
         const response = await axios.get(
-          `https://tekisky-pvt-ltd-backend.vercel.app/consultancy/getoneuploadresume/${id}`,
+          `http://localhost:7000/consultancy/getoneuploadresume/${id}`,
         );
         setApplication(response.data);
       } catch (error) {
@@ -188,12 +194,12 @@ const SingleApplicationPage = () => {
         <div className="mb-8">
           <h2 className="mb-2 text-xl font-semibold text-gray-700">Skills</h2>
           <td className="w-full px-4 py-2">
-            <div className=" flex flex-wrap gap-1 ">
+            <div className="flex flex-wrap gap-1">
               {application.skills.map((skillString) =>
                 skillString.split(",").map((skill, index) => (
                   <div
                     key={index}
-                    className="rounded bg-blue-200 px-2 py-1  text-blue-700"
+                    className="rounded bg-blue-200 px-2 py-1 text-blue-700"
                   >
                     {skill.trim()}
                   </div>
@@ -201,18 +207,58 @@ const SingleApplicationPage = () => {
               )}
             </div>
           </td>
-          <div className="mt-10">
-          <h2 className="text-xl font-semibold mb-2 text-gray-700">Additional Details</h2>
+        </div>
+
+        {/* Additional Information */}
+        <div className="mb-8">
+          <h2 className="mb-2 text-xl font-semibold text-gray-700">Additional Information</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full table-auto border border-gray-200">
+              <tbody>
+                <tr className="bg-gray-200">
+                  <td className="px-4 py-2 font-semibold">Work Status</td>
+                  <td className="px-4 py-2">{application.workStatus}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 font-semibold">Referred By</td>
+                  <td className="px-4 py-2">{application.referredBy}</td>
+                </tr>
+                <tr className="bg-gray-200">
+                  <td className="px-4 py-2 font-semibold">Extra Information</td>
+                  <td className="px-4 py-2">{application.extraInformation}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 font-semibold">English Speaking</td>
+                  <td className="px-4 py-2">{application.englishSpeaking}</td>
+                </tr>
+                <tr className="bg-gray-200">
+                  <td className="px-4 py-2 font-semibold">English Writing</td>
+                  <td className="px-4 py-2">{application.englishWriting}</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 font-semibold">Mock Interview Date</td>
+                  <td className="px-4 py-2">{application.mockInterviewDate}</td>
+                </tr>
+                <tr className="bg-gray-200">
+                  <td className="px-4 py-2 font-semibold">Mock Interview Time</td>
+                  <td className="px-4 py-2">{application.mockInterviewTime}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Resume */}
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold mb-2 text-gray-700">Resume</h2>
           <table className="w-full mb-4">
             <tbody>
-              
               <tr>
                 <td className="font-semibold">Resume:</td>
                 <td><a href={application.resumeUrl} target="_blank" className="text-blue-500 underline">View Resume</a></td>
               </tr>
             </tbody>
           </table>
-        </div>
         </div>
       </div>
     </div>

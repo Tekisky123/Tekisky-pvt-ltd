@@ -53,7 +53,7 @@ body{
 .profiles {
 }
 .courses-img {
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
 }
 
 .content-image {
@@ -341,4 +341,38 @@ body::-webkit-scrollbar-thumb {
     transform: scale(0.8);
     opacity: 0.5;
   }
+}
+
+
+.dropzone {
+  border: 2px dashed #ddd;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.dropzone p {
+  margin-top: 20px;
+}
+
+
+
+/* Hide spinner in WebKit browsers */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide spinner in Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Hide spinner in Microsoft Edge */
+input[type="number"]::-ms-clear,
+input[type="number"]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
 }

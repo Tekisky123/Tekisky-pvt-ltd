@@ -26,7 +26,7 @@ const Blog = () => {
   return (
     <>
       <div className="">
-        <Breadcrumb pageName="Selected Candidates" description="" />
+        <Breadcrumb pageName="Alumini" description="" />
       </div>
 
       <section className="pb-[120px] pt-[120px]">
