@@ -37,6 +37,13 @@ const AssignmentForm: React.FC = () => {
     });
   };
 
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    // Retrieve token from local storage
+    const storedToken = localStorage.getItem("token");
+    setToken(storedToken || "");
+  }, []);
+
   const [existingDescription, setExistingDescription] = useState<string>("");
   const handleChange = (
     e: React.ChangeEvent<
@@ -110,7 +117,13 @@ const AssignmentForm: React.FC = () => {
       const response = await axios.post(
         `https://tekisky-pvt-ltd-backend.vercel.app/consultancy/assignAssessment/${id}`,
         formData,
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        },
       );
+  
 
       Swal.fire("Success", response.data.message, "success").then(() => {
         router.push("/dashboard"); 

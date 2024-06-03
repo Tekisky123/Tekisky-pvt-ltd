@@ -28,8 +28,8 @@ const AddUserModel: React.FC<ModalProps> = ({
     email: "",
   });
 
-  const [token, setToken] = useState("");
   const [showLoader, setShowLoader] = useState(false);
+  const [token, setToken] = useState("");
   useEffect(() => {
     // Retrieve token from local storage
     const storedToken = localStorage.getItem("token");
