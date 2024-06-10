@@ -13,7 +13,7 @@ const Form = () => {
   const router = useRouter();
   const validationSchema = Yup.object({
     employeeNumber: Yup.string()
-      .matches(/^\d{4,5}$/, "Employee number must be a 5-digit number.")
+      .matches(/^\d{4,5}$/, "Employee number must be a 4 and 5-digit number.")
       .nullable(),
     fullName: Yup.string()
       .max(50, "Full name must be less than 50 characters.")
@@ -45,7 +45,7 @@ const Form = () => {
       .max(100, "Please enter a valid percentage (up to 100).")
       .nullable(),
     degreeName: Yup.string()
-      .max(8, "Degree name must be less than 8 characters.")
+      .max(20, "Degree name must be less than 20 characters.")
       .nullable(),
     degreeCollegeName: Yup.string()
       .max(35, "College name must be less than 35 characters.")

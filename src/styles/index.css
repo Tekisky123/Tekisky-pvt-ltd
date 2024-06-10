@@ -324,6 +324,7 @@ body::-webkit-scrollbar-thumb {
   font-family: Consolas, Menlo, Monaco, monospace;
   font-weight: bold;
   opacity: 0.8;
+  display: flex;
 }
 
 .bracket {
