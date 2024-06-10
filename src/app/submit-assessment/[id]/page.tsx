@@ -7,7 +7,7 @@ import { useParams, useRouter } from "next/navigation";
 const SubmitAssessment = () => {
   const [file, setFile] = useState<File | null>(null);
   const { id } = useParams();
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter(); 
 
   useEffect(() => {
     console.log("ID:", id);
@@ -50,7 +50,7 @@ const SubmitAssessment = () => {
       console.log(response);
 
       Swal.fire("Success", "Assessment submitted successfully!", "success").then(() => {
-        router.push("/"); // Navigate to / on success
+        router.push("/"); 
       });
     } catch (error) {
       Swal.fire("Error", "Failed to submit assessment.", "error");

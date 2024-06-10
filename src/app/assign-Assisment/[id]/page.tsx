@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import assignmentsData from "./assignmentsData.json";
-import { useParams, useRouter } from "next/navigation"; // Import useRouter
+import { useParams, useRouter } from "next/navigation"; 
 
 interface Assignment {
   title: string;
@@ -39,7 +39,6 @@ const AssignmentForm: React.FC = () => {
 
   const [token, setToken] = useState("");
   useEffect(() => {
-    // Retrieve token from local storage
     const storedToken = localStorage.getItem("token");
     setToken(storedToken || "");
   }, []);
@@ -82,7 +81,7 @@ const AssignmentForm: React.FC = () => {
   };
 
   const { id } = useParams();
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter(); 
 
   useEffect(() => {
     console.log('ID:', id);

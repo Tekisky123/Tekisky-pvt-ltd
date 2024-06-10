@@ -31,7 +31,6 @@ const AddUserModel: React.FC<ModalProps> = ({
   const [showLoader, setShowLoader] = useState(false);
   const [token, setToken] = useState("");
   useEffect(() => {
-    // Retrieve token from local storage
     const storedToken = localStorage.getItem("token");
     setToken(storedToken || "");
   }, []);
@@ -43,7 +42,6 @@ const AddUserModel: React.FC<ModalProps> = ({
       [name]: value,
     }));
 
-    // Reset errors when input changes
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: "",
@@ -62,7 +60,6 @@ const AddUserModel: React.FC<ModalProps> = ({
       return;
     }
 
-    // Validate mobileNumber
     const mobileRegex = /^[0-9]{10}$/;
     if (
       !formData.mobileNumber.trim() ||
@@ -75,7 +72,6 @@ const AddUserModel: React.FC<ModalProps> = ({
       return;
     }
 
-    // Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim() || !emailRegex.test(formData.email)) {
       setErrors((prevErrors) => ({
@@ -96,11 +92,8 @@ const AddUserModel: React.FC<ModalProps> = ({
         },
       );
       if (response.status === 201) {
-        // Show success message
         Swal.fire("Success!", "User added successfully.", "success");
-        // Close modal
         onClose();
-        // Reset form data
         setFormData({
           fullName: "",
           mobileNumber: "",

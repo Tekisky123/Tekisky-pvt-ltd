@@ -17,7 +17,6 @@ const Dashboard = () => {
   const [displayedStudents, setDisplayedStudents] = useState(5);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [activeTab, setActiveTab] = useState("alumni");
-  const [remainingTime, setRemainingTime] = useState(10 * 60 * 60); 
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -52,17 +51,14 @@ const Dashboard = () => {
       }, logoutTimeout);
     }
 
-    // Check if the screen is small
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     setIsSmallScreen(mediaQuery.matches);
 
-    // Listen for screen size changes
     const handleResize = () => {
       setIsSmallScreen(mediaQuery.matches);
     };
     mediaQuery.addListener(handleResize);
 
-    // Clean up the event listener
     return () => {
       mediaQuery.removeListener(handleResize);
     };
@@ -134,7 +130,6 @@ const Dashboard = () => {
             },
           },
         );
-        // Update users state after deletion
         setUsers(users.filter((user) => user._id !== id));
         Swal.fire("Deleted!", "User has been deleted.", "success");
       } catch (error) {
@@ -165,7 +160,6 @@ const Dashboard = () => {
             },
           },
         );
-        // Update students state after deletion
         setStudents(students.filter((student) => student._id !== id));
         Swal.fire("Deleted!", "Student has been deleted.", "success");
       } catch (error) {
@@ -197,7 +191,6 @@ const Dashboard = () => {
 
   const handleSaveStudent = async (index, id) => {
     try {
-      // Call the API to update the student data
       await axios.put(
         `https://tekisky-pvt-ltd-backend.vercel.app/selectedStudent/update/${id}`,
         editedStudent,
@@ -207,11 +200,9 @@ const Dashboard = () => {
           },
         },
       );
-      // Update the students state with the edited data
       const updatedStudents = [...students];
       updatedStudents[index] = editedStudent;
       setStudents(updatedStudents);
-      // Reset the editIndex and editedStudent state
       setEditIndex(null);
       setEditedStudent({
         name: "",
@@ -236,7 +227,6 @@ const Dashboard = () => {
   };
 
   const handleCancelEdit = () => {
-    // Reset the editIndex and editedStudent state
     setEditIndex(null);
     setEditedStudent({
       name: "",
@@ -292,7 +282,6 @@ const Dashboard = () => {
             >
               Add Student
             </button>
-            {/* Modal */}
             <AddStudentModal
               showModal={showStudentModal}
               onClose={() => setShowStudentModal(false)}
@@ -686,7 +675,6 @@ const Dashboard = () => {
                 Add User
               </button>
 
-              {/* Modal */}
               <AddUserModel
                 showModal={showUserModal}
                 onClose={() => setShowUserModal(false)}

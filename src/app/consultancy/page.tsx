@@ -6,239 +6,156 @@ import SectionTitle from "@/components/Common/SectionTitle";
 import fullStackSkills from "@/components/Consultancy/ConsultancyData";
 import Loader from "@/components/Loader/Loader";
 import { useRouter } from "next/navigation";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const Form = () => {
   const router = useRouter();
-  const initialFormData =
-    typeof localStorage !== "undefined" && localStorage.getItem("formData")
-      ? JSON.parse(localStorage.getItem("formData"))
-      : {
-          employeeNumber: "",
-          fullName: "",
-          email: "",
-          mobileNumber: "",
-          tenthPercentage: "",
-          twelthPercentage: "",
-          twelthCollegeName: "",
-          diplomaPercentage: "",
-          diplomaCollegeName: "",
-          degreePercentage: "",
-          degreeName: "",
-          degreeCollegeName: "",
-          yearOfPassing: "",
-          skills: [],
-          workStatus: "",
-          yearsOfExperience: "",
-          referredBy: "",
-          resume: "",
-          extraInformation: "",
-          englishSpeaking: "",
-          englishWriting: "",
-          mockInterviewDate: "",
-          mockInterviewTime: "",
-        };
-  const [formData, setFormData] = useState(initialFormData);
-  console.log(formData);
-  console.log(initialFormData);
-  useEffect(() => {
-    localStorage.setItem("formData", JSON.stringify(formData));
-  }, [formData]);
-
-  const [loading, setLoading] = useState(false);
-
-  const [errors, setErrors] = useState({
-    employeeNumber: "",
-    fullName: "",
-    email: "",
-    mobileNumber: "",
-    tenthPercentage: "",
-    twelthPercentage: "",
-    twelthCollegeName: "",
-    diplomaPercentage: "",
-    diplomaCollegeName: "",
-    degreePercentage: "",
-    degreeName: "",
-    degreeCollegeName: "",
-    workStatus: "",
-    yearOfPassing: "",
-    referredBy: "",
-    skills: "",
-    yearsOfExperience: "",
-    extraInformation: "",
-    englishSpeaking: "",
-    englishWriting: "",
-    mockInterviewDate: "",
-    mockInterviewTime: "",
+  const validationSchema = Yup.object({
+    employeeNumber: Yup.string()
+      .matches(/^\d{4,5}$/, "Employee number must be a 5-digit number.")
+      .nullable(),
+    fullName: Yup.string()
+      .max(50, "Full name must be less than 50 characters.")
+      .matches(/^[a-zA-Z\s]*$/, "Full name must contain only letters.")
+      .required("Full name is required"),
+    email: Yup.string()
+      .email("Please enter a valid email address.")
+      .required("Email is required"),
+    mobileNumber: Yup.string()
+    
+      .matches(/^\d{10}$/, "Mobile number must be a 10-digit number.")
+      .required("Mobile number is required"),
+    tenthPercentage: Yup.number()
+      .max(100, "Please enter a valid percentage (up to 100).")
+      .required("10th Percentage is required"),
+    twelthPercentage: Yup.number()
+      .max(100, "Please enter a valid percentage (up to 100).")
+      .nullable(),
+    twelthCollegeName: Yup.string()
+      .max(35, "College name must be less than 35 characters.")
+      .nullable(),
+    diplomaPercentage: Yup.number()
+      .max(100, "Please enter a valid percentage (up to 100).")
+      .nullable(),
+    diplomaCollegeName: Yup.string()
+      .max(35, "College name must be less than 35 characters.")
+      .nullable(),
+    degreePercentage: Yup.number()
+      .max(100, "Please enter a valid percentage (up to 100).")
+      .nullable(),
+    degreeName: Yup.string()
+      .max(8, "Degree name must be less than 8 characters.")
+      .nullable(),
+    degreeCollegeName: Yup.string()
+      .max(35, "College name must be less than 35 characters.")
+      .nullable(),
+    yearOfPassing: Yup.string().required("Year of passing is required"),
+    skills: Yup.array().required("Skills are required"),
+    workStatus: Yup.string().required("Work status is required"),
+    yearsOfExperience: Yup.string().nullable(),
+    referredBy: Yup.string().nullable(),
+    resume: Yup.mixed().required("Resume is required"),
+    extraInformation: Yup.string().nullable(),
+    englishSpeaking: Yup.string().required(
+      "English speaking level is required",
+    ),
+    englishWriting: Yup.string().required("English writing level is required"),
+    mockInterviewDate: Yup.date().required("Mock interview date is required"),
+    mockInterviewTime: Yup.string().required("Mock interview time is required"),
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >,
-  ) => {
-    const { name, value, type } = e.target;
-    let error = "";
-
-    if (name === "employeeNumber") {
-      if (value.length > 5 || isNaN(Number(value))) {
-        error = "Employee number must be a 5-digit number.";
+  const formik = useFormik({
+    initialValues: {
+      employeeNumber: "",
+      fullName: "",
+      email: "",
+      mobileNumber: "",
+      tenthPercentage: "",
+      twelthPercentage: "",
+      twelthCollegeName: "",
+      diplomaPercentage: "",
+      diplomaCollegeName: "",
+      degreePercentage: "",
+      degreeName: "",
+      degreeCollegeName: "",
+      yearOfPassing: "",
+      skills: [],
+      workStatus: "",
+      yearsOfExperience: "",
+      referredBy: "",
+      resume: "",
+      extraInformation: "",
+      englishSpeaking: "",
+      englishWriting: "",
+      mockInterviewDate: "",
+      mockInterviewTime: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      const requiredFields = [
+        "fullName",
+        "email",
+        "mobileNumber",
+        "tenthPercentage",
+        "workStatus",
+        "yearOfPassing",
+        "skills",
+        "englishSpeaking",
+        "englishWriting",
+        "mockInterviewDate",
+        "mockInterviewTime",
+        "resume",
+      ];
+      const missingFields = requiredFields.filter((field) => !values[field]);
+      if (missingFields.length > 0) {
+        Swal.fire({
+          icon: "error",
+          title: "Missing Fields",
+          text: `Please fill in the following required fields: ${missingFields.join(", ")}.`,
+        });
+        return;
       }
-    }
-    if (
-      (name === "tenthPercentage" ||
-        name === "twelthPercentage" ||
-        name === "diplomaPercentage" ||
-        name === "degreePercentage") &&
-      (value.length > 5 || isNaN(Number(value)) || Number(value) > 100)
-    ) {
-      error = "Please enter a valid percentage (up to 100).";
-    }
 
-    if (name === "fullName") {
-      if (value.length > 50) {
-        error = "Full name must be less than 50 characters.";
-      }
-      if (!/^[a-zA-Z\s]*$/.test(value)) {
-        error = "Full name must contain only letters.";
-      }
-    }
-
-    if (name === "email") {
-      if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)) {
-        error = "Please enter a valid email address.";
-      }
-    }
-
-    if (name === "mobileNumber") {
-      if (value.length > 10 || isNaN(Number(value))) {
-        error = "Mobile number must be a 10-digit number.";
-      }
-    }
-
-    if (
-      ["twelthCollegeName", "diplomaCollegeName", "degreeCollegeName"].includes(
-        name,
-      )
-    ) {
-      if (value.length > 50) {
-        error = "College name must be less than 35 characters.";
-      }
-    }
-
-    if (name === "degreeName" && value.length > 8) {
-      error = "Degree name must be less than 8 characters.";
-    }
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: error,
-    }));
-
-    if (name === "mobileNumber" && value.length > 10) {
-      return;
-    }
-    if (name === "tenthPercentage" && value.length > 5) {
-      return;
-    }
-    if (name === "employeeNumber" && value.length > 5) {
-      return;
-    }
-
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    setFormData((prevState) => ({
-      ...prevState,
-      resume: file,
-    }));
-
-    const preview = document.getElementById("file-preview");
-    if (preview && file) {
-      const textNode = document.createTextNode(file.name);
-      preview.innerHTML = "";
-      preview.appendChild(textNode);
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const requiredFields = [
-      "fullName",
-      "email",
-      "mobileNumber",
-      "tenthPercentage",
-      "workStatus",
-      "yearOfPassing",
-      "skills",
-      "englishSpeaking",
-      "englishWriting",
-      "mockInterviewDate",
-      "mockInterviewTime",
-      "resume",
-    ];
-    const missingFields = requiredFields.filter((field) => !formData[field]);
-    if (missingFields.length > 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Missing Fields",
-        text: `Please fill in the following required fields: ${missingFields.join(", ")}.`,
-      });
-      return;
-    }
-
-    const mobileNumberPattern = /^\d{10}$/;
-    if (!mobileNumberPattern.test(formData.mobileNumber)) {
-      Swal.fire({
-        icon: "error",
-        title: "Invalid Mobile Number",
-        text: "Please enter a valid 10-digit mobile number.",
-      });
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const formDataToSend = new FormData();
-      console.log(formDataToSend);
-      for (const key in formData) {
-        if (key === "skills") {
-          formDataToSend.append(key, selectedSkills.join(","));
-        } else if (key === "resume" && formData[key]) {
-          formDataToSend.append(key, formData[key]);
-        } else {
-          formDataToSend.append(key, formData[key as keyof typeof formData]);
+      setLoading(true);
+      try {
+        const formDataToSend = new FormData();
+        for (const key in values) {
+          if (key === "skills") {
+            formDataToSend.append(key, values[key].join(","));
+          } else if (key === "resume" && values[key]) {
+            formDataToSend.append(key, values[key]);
+          } else {
+            formDataToSend.append(key, values[key]);
+          }
         }
+        await axios.post(
+          "https://tekisky-pvt-ltd-backend.vercel.app/consultancy/uploadResume",
+          formDataToSend,
+        );
+        localStorage.removeItem("formData");
+        Swal.fire({
+          icon: "success",
+          title: "Your Form Submitted Successfully!",
+          text: "We have received your resume. We will contact you via email.",
+          showConfirmButton: false,
+          timer: 4000,
+        }).then(() => {
+          router.push("/");
+        });
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: " Failed",
+          text: "Something Went Wrong !",
+        });
+      } finally {
+        setLoading(false);
       }
-      await axios.post(
-        "https://tekisky-pvt-ltd-backend.vercel.app/consultancy/uploadResume",
-        formDataToSend,
-      );
-      localStorage.removeItem("formData");
-      Swal.fire({
-        icon: "success",
-        title: "Your Form Submitted Successfully!",
-        text: "We have received your resume. We will contact you via email.",
-        showConfirmButton: false,
-        timer: 4000,
-      }).then(() => {
-        router.push("/");
-      });
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: " Failed",
-        text: "Something Went Wrong !",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+  });
 
+  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSkills, setFilteredSkills] = useState<string[]>([]);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
@@ -261,17 +178,19 @@ const Form = () => {
   };
 
   const handleSkillSelect = (skill: string) => {
-    if (!selectedSkills.includes(skill)) {
-      setSelectedSkills([...selectedSkills, skill]);
-      setSearchTerm("");
-      setFilteredSkills([]);
-    }
+    setSelectedSkills([...selectedSkills, skill]);
+    setSearchTerm("");
+    setFilteredSkills([]);
+    formik.setFieldValue("skills", [...selectedSkills, skill]);
   };
 
   const handleSkillRemove = (skill: string) => {
     setSelectedSkills(selectedSkills.filter((s) => s !== skill));
+    formik.setFieldValue(
+      "skills",
+      selectedSkills.filter((s) => s !== skill),
+    ); 
   };
-
   const generateYears = () => {
     const currentYear = new Date().getFullYear();
     const years = [];
@@ -286,7 +205,7 @@ const Form = () => {
     <div className="container flex flex-col justify-center lg:flex-row ">
       <form
         className="container mx-auto mb-5 mt-44  lg:w-1/2 "
-        onSubmit={handleSubmit}
+        onSubmit={formik.handleSubmit}
       >
         <div className=""></div>
         <div className="space-y-12">
@@ -323,15 +242,17 @@ const Form = () => {
                     placeholder="Enter Your Emp ID"
                     maxLength={6}
                     min="0"
-                    value={formData.employeeNumber}
-                    onChange={handleChange}
+                    value={formik.values.employeeNumber}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     className="block w-full rounded-md border-0 px-3 py-1.5  text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
                   />
-                  {errors.employeeNumber && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {errors.employeeNumber}
-                    </p>
-                  )}
+                  {formik.touched.employeeNumber &&
+                  formik.errors.employeeNumber ? (
+                    <div className="text-red-500">
+                      {formik.errors.employeeNumber}
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
@@ -348,17 +269,16 @@ const Form = () => {
                     type="text"
                     id="fullName"
                     name="fullName"
-                    maxLength={30}
                     placeholder="Enter Your Full Name"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                    maxLength={50}
+                    value={formik.values.fullName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
                   />
-                  {errors.fullName && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {errors.fullName}
-                    </p>
-                  )}
+                  {formik.touched.fullName && formik.errors.fullName ? (
+                    <div className="text-red-500">{formik.errors.fullName}</div>
+                  ) : null}
                 </div>
               </div>
 
@@ -374,14 +294,15 @@ const Form = () => {
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="Enter Your Email ID"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                    placeholder="Enter Your Email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
                   />
-                  {errors.email && (
-                    <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-                  )}
+                  {formik.touched.email && formik.errors.email ? (
+                    <div className="text-red-500">{formik.errors.email}</div>
+                  ) : null}
                 </div>
               </div>
               <div className="col-span-full">
@@ -394,20 +315,19 @@ const Form = () => {
                 <div className="mt-2">
                   <input
                     type="number"
-                    maxLength={10}
-                    min="0"
                     id="mobileNumber"
                     name="mobileNumber"
                     placeholder="Enter Your Mobile Number"
-                    value={formData.mobileNumber}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                    value={formik.values.mobileNumber}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
                   />
-                  {errors.mobileNumber && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {errors.mobileNumber}
-                    </p>
-                  )}
+                  {formik.touched.mobileNumber && formik.errors.mobileNumber ? (
+                    <div className="text-red-500">
+                      {formik.errors.mobileNumber}
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
@@ -421,13 +341,13 @@ const Form = () => {
                     id="referredBy"
                     name="referredBy"
                     placeholder="Enter the name of the referrer"
-                    value={formData.referredBy}
-                    onChange={handleChange}
+                    value={formik.values.referredBy}
+                    onChange={formik.handleChange}
                     className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
                   />
-                  {errors.referredBy && (
+                  {formik.errors.referredBy && (
                     <p className="mt-1 text-sm text-red-500">
-                      {errors.referredBy}
+                      {formik.errors.referredBy}
                     </p>
                   )}
                 </div>
@@ -444,19 +364,19 @@ const Form = () => {
                   <input
                     type="number"
                     id="tenthPercentage"
-                    min="0"
-                    pattern="\d*"
-                    placeholder="Enter Your 10th Percentage"
                     name="tenthPercentage"
-                    value={formData.tenthPercentage}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                    placeholder="Enter Your 10th Percentage"
+                    value={formik.values.tenthPercentage}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
                   />
-                  {errors.tenthPercentage && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {errors.tenthPercentage}
-                    </p>
-                  )}
+                  {formik.touched.tenthPercentage &&
+                  formik.errors.tenthPercentage ? (
+                    <div className="text-red-500">
+                      {formik.errors.tenthPercentage}
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
@@ -469,22 +389,24 @@ const Form = () => {
                 </label>
                 <div className="mt-2">
                   <input
-                    type="text"
+                    type="number"
                     id="twelthPercentage"
                     name="twelthPercentage"
                     placeholder="Enter Your 12th Percentage"
-                    value={formData.twelthPercentage}
-                    onChange={handleChange}
-                    maxLength={5}
-                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                    value={formik.values.twelthPercentage}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
                   />
-                  {errors.employeeNumber && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {errors.twelthPercentage}
-                    </p>
-                  )}
+                  {formik.touched.twelthPercentage &&
+                  formik.errors.twelthPercentage ? (
+                    <div className="text-red-500">
+                      {formik.errors.twelthPercentage}
+                    </div>
+                  ) : null}
                 </div>
               </div>
+
               <div className="col-span-full">
                 <label
                   htmlFor="twelthCollegeName"
@@ -496,18 +418,19 @@ const Form = () => {
                   <input
                     type="text"
                     id="twelthCollegeName"
-                    placeholder="Enter 12th College Name"
                     name="twelthCollegeName"
-                    value={formData.twelthCollegeName}
-                    onChange={handleChange}
-                    maxLength={35}
-                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                    placeholder="Enter Your 12th College Name"
+                    value={formik.values.twelthCollegeName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
                   />
-                  {errors.employeeNumber && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {errors.twelthCollegeName}
-                    </p>
-                  )}
+                  {formik.touched.twelthCollegeName &&
+                  formik.errors.twelthCollegeName ? (
+                    <div className="text-red-500">
+                      {formik.errors.twelthCollegeName}
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -524,20 +447,21 @@ const Form = () => {
             </label>
             <div className="mt-2">
               <input
-                type="text"
+                type="number"
                 id="diplomaPercentage"
                 name="diplomaPercentage"
-                placeholder="Enter Diploma Percentage"
-                value={formData.diplomaPercentage}
-                onChange={handleChange}
-                maxLength={5}
-                className="block w-full rounded-md border-0 px-3  py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                placeholder="Enter Your Diploma Percentage"
+                value={formik.values.diplomaPercentage}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
               />
-              {errors.employeeNumber && (
-                <p className="mt-1 text-sm text-red-500">
-                  {errors.diplomaPercentage}
-                </p>
-              )}
+              {formik.touched.diplomaPercentage &&
+              formik.errors.diplomaPercentage ? (
+                <div className="text-red-500">
+                  {formik.errors.diplomaPercentage}
+                </div>
+              ) : null}
             </div>
           </div>
           <div className="col-span-full mb-10 ">
@@ -552,17 +476,18 @@ const Form = () => {
                 type="text"
                 id="diplomaCollegeName"
                 name="diplomaCollegeName"
-                placeholder="Enter Diploma College Name"
-                value={formData.diplomaCollegeName}
-                onChange={handleChange}
-                maxLength={35}
-                className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                placeholder="Enter Your Diploma College Name"
+                value={formik.values.diplomaCollegeName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
               />
-              {errors.employeeNumber && (
-                <p className="mt-1 text-sm text-red-500">
-                  {errors.diplomaCollegeName}
-                </p>
-              )}
+              {formik.touched.diplomaCollegeName &&
+              formik.errors.diplomaCollegeName ? (
+                <div className="text-red-500">
+                  {formik.errors.diplomaCollegeName}
+                </div>
+              ) : null}
             </div>
           </div>
 
@@ -578,15 +503,15 @@ const Form = () => {
                 type="text"
                 id="degreeName"
                 name="degreeName"
-                placeholder="Enter Name of Degree"
-                value={formData.degreeName}
-                onChange={handleChange}
-                maxLength={8}
-                className="block w-full rounded-md border-0 px-3  py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                placeholder="Enter Your Degree Name"
+                value={formik.values.degreeName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
               />
-              {errors.employeeNumber && (
-                <p className="mt-1 text-sm text-red-500">{errors.degreeName}</p>
-              )}
+              {formik.touched.degreeName && formik.errors.degreeName ? (
+                <div className="text-red-500">{formik.errors.degreeName}</div>
+              ) : null}
             </div>
           </div>
 
@@ -599,20 +524,21 @@ const Form = () => {
             </label>
             <div className="mt-2">
               <input
-                type="text"
+                type="number"
                 id="degreePercentage"
                 name="degreePercentage"
-                placeholder="Enter Degree Percentage"
-                value={formData.degreePercentage}
-                onChange={handleChange}
-                maxLength={8}
-                className="block w-full rounded-md border-0 px-3  py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                placeholder="Enter Your Degree Percentage"
+                value={formik.values.degreePercentage}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
               />
-              {errors.employeeNumber && (
-                <p className="mt-1 text-sm text-red-500">
-                  {errors.degreePercentage}
-                </p>
-              )}
+              {formik.touched.degreePercentage &&
+              formik.errors.degreePercentage ? (
+                <div className="text-red-500">
+                  {formik.errors.degreePercentage}
+                </div>
+              ) : null}
             </div>
           </div>
 
@@ -628,19 +554,21 @@ const Form = () => {
                 type="text"
                 id="degreeCollegeName"
                 name="degreeCollegeName"
-                placeholder="Enter Degree College/University Name"
-                value={formData.degreeCollegeName}
-                onChange={handleChange}
-                maxLength={35}
-                className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300   placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                placeholder="Enter Your Degree College Name"
+                value={formik.values.degreeCollegeName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
               />
-              {errors.employeeNumber && (
-                <p className="mt-1 text-sm text-red-500">
-                  {errors.degreeCollegeName}
-                </p>
-              )}
+              {formik.touched.degreeCollegeName &&
+              formik.errors.degreeCollegeName ? (
+                <div className="text-red-500">
+                  {formik.errors.degreeCollegeName}
+                </div>
+              ) : null}
             </div>
           </div>
+
           <div className=" col-span-full  mb-10 ">
             <label
               htmlFor="yearOfPassing"
@@ -652,8 +580,9 @@ const Form = () => {
               <select
                 id="yearOfPassing"
                 name="yearOfPassing"
-                value={formData.yearOfPassing}
-                onChange={handleChange}
+                value={formik.values.yearOfPassing}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 className="block w-full rounded-md border-0 px-3  py-2.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
               >
                 <option value="">Select Year</option>
@@ -663,11 +592,11 @@ const Form = () => {
                   </option>
                 ))}
               </select>
-              {errors.employeeNumber && (
-                <p className="mt-1 text-sm text-red-500">
-                  {errors.yearOfPassing}
-                </p>
-              )}
+              {formik.touched.yearOfPassing && formik.errors.yearOfPassing ? (
+                <div className="text-red-500">
+                  {formik.errors.yearOfPassing}
+                </div>
+              ) : null}
               <datalist id="yearList">
                 {years.map((year) => (
                   <option key={year} value={year} />
@@ -676,77 +605,93 @@ const Form = () => {
             </div>
           </div>
 
-          <div className="col-span-full mb-10">
-            <div className="flex flex-col">
-              <label
-                htmlFor="skills"
-                className="block text-sm font-medium leading-6 text-black text-gray-900 dark:text-white"
-              >
-                Skills <span className="text-red-500">*</span>{" "}
-              </label>
-              <div className="mt-2 ">
-                <input
-                  type="text"
-                  placeholder="Search for a skill..."
-                  value={searchTerm}
-                  onChange={handleSkillChange}
-                  className="mb-4 w-full rounded-md border border-gray-300 px-3 py-2 text-black dark:bg-dark dark:text-white"
-                />
-              </div>
-              <div className="flex flex-wrap">
+          <div className="sm:col-span-6">
+            <label
+              htmlFor="skills"
+              className="block text-sm font-medium leading-6 text-black text-gray-900 dark:text-white"
+            >
+              Skills <span className="text-red-500">*</span>
+            </label>
+            <div className="mt-2">
+              <input
+                type="text"
+                id="skills"
+                name="skills"
+                placeholder="Search and add skills"
+                value={searchTerm}
+                onChange={handleSkillChange}
+                className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
+              />
+              {formik.touched.skills &&
+              typeof formik.errors.skills === "string" ? (
+                <div className="text-red-500">{formik.errors.skills}</div>
+              ) : null}
+
+              <div className="flex flex-wrap items-center gap-2 mt-4">
                 {selectedSkills.map((skill, index) => (
-                  <div
+                  <span
                     key={index}
-                    className="selected-skill mb-2 mr-2 flex items-center rounded-md border border-gray-100 bg-green-100 px-2 py-1"
+                    className="inline-flex items-center gap-x-1.5 rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-700"
                   >
-                    <span className="mr-1">{skill}</span>
+                    {skill}
                     <button
+                      type="button"
+                      className="inline-flex items-center rounded-full text-indigo-400 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       onClick={() => handleSkillRemove(skill)}
-                      className="ml-1 focus:outline-none"
                     >
-                      &times;
+                      <span className="sr-only">Remove skill</span>
+                      <svg
+                        className="h-4 w-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 8.586l3.95-3.95a1 1 0 011.414 1.414L11.414 10l3.95 3.95a1 1 0 01-1.414 1.414L10 11.414l-3.95 3.95a1 1 0 01-1.414-1.414L8.586 10l-3.95-3.95A1 1 0 016.05 4.636L10 8.586z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
                     </button>
-                  </div>
+                  </span>
                 ))}
               </div>
-              <ul className="grid grid-cols-3 gap-4">
-                {filteredSkills.map((skill, index) => (
-                  <li key={index}>
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        onChange={() => handleSkillSelect(skill)}
-                        checked={selectedSkills.includes(skill)}
-                        className="mr-2"
-                      />
+              {filteredSkills.length > 0 && (
+                <ul className="mt-2 max-h-40 overflow-y-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                  {filteredSkills.map((skill, index) => (
+                    <li
+                      key={index}
+                      className="cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white"
+                      onClick={() => handleSkillSelect(skill)}
+                    >
                       {skill}
-                    </label>
-                  </li>
-                ))}
-              </ul>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
 
-          <div className="col-span-full mb-10">
+          <div className="col-span-full mb-10 mt-5">
             <label className="block text-sm font-medium leading-6 text-black text-gray-900 dark:text-white">
               Work Status <span className="text-red-500">*</span>{" "}
             </label>
             <div className="mt-2 flex">
-              {/* Experienced */}
               <div className="mb-4 mr-4">
                 <input
                   type="radio"
                   id="experience"
                   name="workStatus"
                   value="Experience"
-                  checked={formData.workStatus === "Experience"}
-                  onChange={handleChange}
+                  checked={formik.values.workStatus === "Experience"}
+                  onChange={formik.handleChange}
                   className="sr-only"
                 />
                 <label
                   htmlFor="experience"
                   className={`block cursor-pointer rounded-lg border border-gray-300 bg-white p-2 shadow-sm transition-transform duration-300 ease-in-out  ${
-                    formData.workStatus === "Experience"
+                    formik.values.workStatus === "Experience"
                       ? "scale-105 transform border-4 border-green-500"
                       : ""
                   }`}
@@ -758,21 +703,20 @@ const Form = () => {
                 </label>
               </div>
 
-              {/* Fresher */}
               <div className="mb-4 mr-4">
                 <input
                   type="radio"
                   id="fresher"
                   name="workStatus"
                   value="Fresher"
-                  checked={formData.workStatus === "Fresher"}
-                  onChange={handleChange}
+                  checked={formik.values.workStatus === "Fresher"}
+                  onChange={formik.handleChange}
                   className="sr-only"
                 />
                 <label
                   htmlFor="fresher"
                   className={`block cursor-pointer rounded-lg border border-gray-300 bg-white p-2 shadow-sm transition-transform duration-300 ease-in-out ${
-                    formData.workStatus === "Fresher"
+                    formik.values.workStatus === "Fresher"
                       ? "scale-105 transform border-4 border-green-500"
                       : ""
                   }`}
@@ -784,13 +728,14 @@ const Form = () => {
                 </label>
               </div>
             </div>
-            {errors.workStatus && (
-              <p className="mt-1 text-sm text-red-500">{errors.workStatus}</p>
+            {formik.errors.workStatus && formik.touched.workStatus && (
+              <p className="mt-1 text-sm text-red-500">
+                {formik.errors.workStatus}
+              </p>
             )}
           </div>
 
-          {/* Years of Experience */}
-          {formData.workStatus === "Experience" && (
+          {formik.values.workStatus === "Experience" && (
             <div className=" col-span-full  mb-10 ">
               <label
                 htmlFor="yearsOfExperience"
@@ -804,14 +749,14 @@ const Form = () => {
                   id="yearsOfExperience"
                   name="yearsOfExperience"
                   placeholder="Enter Year of Experience (Ex: 1 Year , 2 Year..) "
-                  value={formData.yearsOfExperience}
+                  value={formik.values.yearsOfExperience}
                   maxLength={10}
-                  onChange={handleChange}
+                  onChange={formik.handleChange}
                   className="block w-full rounded-md border-0 px-3  py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
                 />
-                {errors.yearsOfExperience && (
+                {formik.errors.yearsOfExperience && (
                   <p className="mt-1 text-sm text-red-500">
-                    {errors.yearsOfExperience}
+                    {formik.errors.yearsOfExperience}
                   </p>
                 )}
               </div>
@@ -827,19 +772,18 @@ const Form = () => {
                 id="extraInformation"
                 name="extraInformation"
                 placeholder="Enter any queries or questions you have"
-                value={formData.extraInformation}
-                onChange={handleChange}
+                value={formik.values.extraInformation}
+                onChange={formik.handleChange}
                 className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white sm:text-sm sm:leading-6"
               />
-              {errors.extraInformation && (
+              {formik.errors.extraInformation && (
                 <p className="mt-1 text-sm text-red-500">
-                  {errors.extraInformation}
+                  {formik.errors.extraInformation}
                 </p>
               )}
             </div>
           </div>
 
-          {/* English Speaking Proficiency */}
           <div className="col-span-full mb-10">
             <label className="block text-sm font-medium leading-6 text-black text-gray-900 dark:text-white">
               How good are you with speaking English?
@@ -849,8 +793,9 @@ const Form = () => {
               <select
                 id="englishSpeaking"
                 name="englishSpeaking"
-                value={formData.englishSpeaking}
-                onChange={handleChange}
+                value={formik.values.englishSpeaking}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 className="block w-full rounded-md border-0 px-3  py-2.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
               >
                 <option value="" disabled>
@@ -862,15 +807,14 @@ const Form = () => {
                 <option value="Basic">Basic</option>
                 <option value="Beginner">Beginner</option>
               </select>
-              {errors.englishSpeaking && (
+              {formik.touched.englishSpeaking && (
                 <p className="mt-1 text-sm text-red-500">
-                  {errors.englishSpeaking}
+                  {formik.errors.englishSpeaking}
                 </p>
               )}
             </div>
           </div>
 
-          {/* English Writing Proficiency */}
           <div className="col-span-full mb-10">
             <label className="block text-sm font-medium leading-6 text-black text-gray-900 dark:text-white">
               How good are you with writing English?
@@ -880,8 +824,9 @@ const Form = () => {
               <select
                 id="englishWriting"
                 name="englishWriting"
-                value={formData.englishWriting}
-                onChange={handleChange}
+                value={formik.values.englishWriting}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 className="block w-full rounded-md border-0 px-3  py-2.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
               >
                 <option value="" disabled>
@@ -893,9 +838,9 @@ const Form = () => {
                 <option value="Basic">Basic</option>
                 <option value="Beginner">Beginner</option>
               </select>
-              {errors.englishWriting && (
+              {formik.touched.englishWriting && (
                 <p className="mt-1 text-sm text-red-500">
-                  {errors.englishWriting}
+                  {formik.errors.englishWriting}
                 </p>
               )}
             </div>
@@ -940,8 +885,8 @@ const Form = () => {
                 type="date"
                 id="mockInterviewDate"
                 name="mockInterviewDate"
-                value={formData.mockInterviewDate}
-                onChange={handleChange}
+                value={formik.values.mockInterviewDate}
+                onChange={formik.handleChange}
                 min={new Date().toISOString().split("T")[0]}
                 className="h-10 w-full rounded-lg border px-3 outline-none focus:ring focus:ring-indigo-500"
               />
@@ -956,8 +901,8 @@ const Form = () => {
                 type="time"
                 id="mockInterviewTime"
                 name="mockInterviewTime"
-                value={formData.mockInterviewTime}
-                onChange={handleChange}
+                value={formik.values.mockInterviewTime}
+                onChange={formik.handleChange}
                 className="h-10 w-full rounded-lg border px-3 outline-none focus:ring focus:ring-indigo-500"
               />
             </div>
@@ -982,7 +927,12 @@ const Form = () => {
                       type="file"
                       id="resume"
                       name="resume"
-                      onChange={handleFileChange}
+                      onChange={(event) => {
+                        formik.setFieldValue(
+                          "resume",
+                          event.currentTarget.files[0],
+                        );
+                      }}
                       className="sr-only"
                     />
                   </label>
@@ -994,6 +944,11 @@ const Form = () => {
                 <div id="file-preview"></div>
               </div>
             </div>
+            {formik.errors.resume && formik.touched.resume && (
+              <p className="mt-1 text-sm text-red-500">
+                {formik.errors.resume}
+              </p>
+            )}
           </div>
           <div className="mb-6 mt-6 flex items-center justify-end  gap-x-6">
             <button
