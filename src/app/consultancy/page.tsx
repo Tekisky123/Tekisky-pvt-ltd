@@ -33,13 +33,13 @@ const Form = () => {
       .max(100, "Please enter a valid percentage (up to 100).")
       .nullable(),
     twelthCollegeName: Yup.string()
-      .max(35, "College name must be less than 35 characters.")
+      .max(50, "College name must be less than 50 characters.")
       .nullable(),
     diplomaPercentage: Yup.number()
       .max(100, "Please enter a valid percentage (up to 100).")
       .nullable(),
     diplomaCollegeName: Yup.string()
-      .max(35, "College name must be less than 35 characters.")
+      .max(50, "College name must be less than 50 characters.")
       .nullable(),
     degreePercentage: Yup.number()
       .max(100, "Please enter a valid percentage (up to 100).")
@@ -48,7 +48,7 @@ const Form = () => {
       .max(20, "Degree name must be less than 20 characters.")
       .nullable(),
     degreeCollegeName: Yup.string()
-      .max(35, "College name must be less than 35 characters.")
+      .max(50, "College name must be less than 50 characters.")
       .nullable(),
     yearOfPassing: Yup.string().required("Year of passing is required"),
     skills: Yup.array().required("Skills are required"),
