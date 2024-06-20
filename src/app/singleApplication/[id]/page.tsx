@@ -16,15 +16,15 @@ interface Applicant {
   email: string;
   mobileNumber: string;
   employeeNumber: string;
-  tenthPercentage: number | null;
-  twelthPercentage: number | null;
+  tenthPercentage: number;
+  twelthPercentage: number;
   twelthCollegeName: string;
-  diplomaPercentage: number | null;
-  degreePercentage: number | null;
+  diplomaPercentage: number;
+  degreePercentage: number;
   diplomaCollegeName: string;
   degreeName: string;
   degreeCollegeName: string;
-  yearOfPassing: number | null;
+  yearOfPassing: number;
   skills: string[];
   yearsOfExperience: string;
   resumeUrl: string;
@@ -42,7 +42,7 @@ interface Applicant {
 }
 
 const SingleApplicationPage = () => {
-  const [application, setApplication] = useState<Applicant | null>(null);
+  const [application, setApplication] = useState<Applicant>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
