@@ -14,6 +14,7 @@ interface Applicant {
   fullName: string;
   email: string;
   mobileNumber: string;
+  referredBy:string;
   employeeNumber: string;
   tenthPercentage: number;
   twelthPercentage: number ;
@@ -29,6 +30,8 @@ interface Applicant {
   resumeUrl: string;
   interestedInMockInterview?: boolean;
   rating?: number;
+  communicationSkillRating?:number;
+  technicalRoundComments?:string;
   status?: string;
   comments?: string;
   mockInterviewFeedback?: string;
@@ -334,6 +337,9 @@ const ConsultancyApplications: React.FC = () => {
                     <strong>Mobile Number:</strong> {applicant.mobileNumber}
                   </p>
                   <p className="mb-1 text-gray-700">
+                    <strong>Referred By:</strong> {applicant.referredBy}
+                  </p>
+                  <p className="mb-1 text-gray-700">
                     <strong>Years of Experience:</strong>{" "}
                     {applicant.yearsOfExperience}
                   </p>
@@ -452,6 +458,9 @@ const ConsultancyApplications: React.FC = () => {
                 <th className="border px-4 py-2  text-body-color  text-gray-700 dark:text-body-color-dark">
                   Mobile Number
                 </th>
+                <th className="border px-4 py-2  text-body-color  text-gray-700 dark:text-body-color-dark">
+                  Refered By
+                </th>
                 <th className="w-10 border px-4  py-2  text-body-color text-gray-700 dark:text-body-color-dark">
                   Year Of Experience
                 </th>
@@ -473,8 +482,9 @@ const ConsultancyApplications: React.FC = () => {
               {filteredApplicants.map((applicant) => (
                 <tr key={applicant._id}>
                   <td className="border px-4 py-2">{applicant.fullName}</td>
-                  <td className="border px-4 py-2">{applicant.email}</td>
+                  <td className="border">{applicant.email}</td>
                   <td className="border px-4 py-2">{applicant.mobileNumber}</td>
+                  <td className="border px-4 py-2">{applicant.referredBy}</td>
 
                   <td className="border px-4 py-2">
                     {applicant.yearsOfExperience}
@@ -758,6 +768,41 @@ const ConsultancyApplications: React.FC = () => {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className="mb-4">
+              <label className="mb-2 block font-bold" htmlFor="communicationSkillRating">
+               Communication Skills Rating:
+              </label>
+              <select
+                id="rating"
+                value={selectedApplicant.communicationSkillRating ?? ""}
+                onChange={(e) =>
+                  handleFieldChange("rating", parseInt(e.target.value))
+                }
+                className="w-full rounded border border-gray-300 px-3 py-2"
+              >
+                <option value="" disabled>
+                  Select rating
+                </option>
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="mb-4">
+              <label className="mb-2 block font-bold" htmlFor="technicalRoundComments">
+                Technical Round Comments:
+              </label>
+              <textarea
+                id="technicalRoundComments"
+                value={selectedApplicant.technicalRoundComments || ""}
+                onChange={(e) => handleFieldChange("technicalRoundComments", e.target.value)}
+                className="w-full rounded border px-4 py-2"
+              />
             </div>
 
             <div className="mb-4">

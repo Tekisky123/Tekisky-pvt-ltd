@@ -331,27 +331,7 @@ const Form = () => {
                 </div>
               </div>
 
-              <div className="col-span-full mb-10">
-                <label className="block text-sm font-medium leading-6 text-black text-gray-900 dark:text-white">
-                  Referred By
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    id="referredBy"
-                    name="referredBy"
-                    placeholder="Enter the name of the referrer"
-                    value={formik.values.referredBy}
-                    onChange={formik.handleChange}
-                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
-                  />
-                  {formik.errors.referredBy && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {formik.errors.referredBy}
-                    </p>
-                  )}
-                </div>
-              </div>
+              
 
               <div className=" col-span-full sm:col-start-1">
                 <label
@@ -907,6 +887,28 @@ const Form = () => {
               />
             </div>
           </div>
+
+          <div className="col-span-full mb-10">
+                <label className="block text-sm font-medium leading-6 text-black text-gray-900 dark:text-white">
+                  Referred By
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    id="referredBy"
+                    name="referredBy"
+                    placeholder="Enter the name of the referrer"
+                    value={formik.values.referredBy}
+                    onChange={formik.handleChange}
+                    className="block w-full rounded-md border-0 px-3 py-1.5 text-black text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:bg-dark dark:text-white  sm:text-sm sm:leading-6"
+                  />
+                  {formik.errors.referredBy && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {formik.errors.referredBy}
+                    </p>
+                  )}
+                </div>
+              </div>
 
           <div className="col-span-full">
             <label
